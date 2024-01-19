@@ -1,40 +1,28 @@
-import React, { useState } from "react";
-import {
-  Table,
-  Button,
-  Typography,
-  Space,
-  Badge,
-  Avatar,
-  Tag,
-  Select,
-  Input,
-} from "antd";
 import {
   EllipsisOutlined,
-  PlusOutlined,
-  UserOutlined,
-  IdcardOutlined,
-  PhoneOutlined,
-  ManOutlined,
-  WomanOutlined,
-  MailOutlined,
-  BankOutlined,
-  CalendarOutlined,
-  HomeOutlined,
   GlobalOutlined,
+  HomeOutlined,
+  MailOutlined,
+  PhoneOutlined,
   UnorderedListOutlined,
-  NumberOutlined,
+  UserOutlined
 } from "@ant-design/icons";
-import PageLayout from "../../ProjectLayOut/PageLayout";
-import TableInput from "../../TableInput/TableInputLayout";
-import employeesData from "../../data/employeesData";
 import {
-  getColor,
-  renderSecondaryText,
-  renderSecondaryTextUnderline,
+  Avatar,
+  Button,
+  Space,
+  Table,
+  Tag,
+  Typography
+} from "antd";
+// import { useState } from "react";
+import PageLayout from "../../ProjectLayOut/PageLayout";
+// import TableInput from "../../TableInput/TableInputLayout";
+import {
+  renderSecondaryText
 } from "../../Utils/Utilities";
-const { Option } = Select;
+// import employeesData from "../../data/employeesData";
+// const { Option } = Select;
 // const { Search } = Input;
 
 const { Title, Text } = Typography;
@@ -53,7 +41,7 @@ const columns = [
     title: "",
     dataIndex: "avatar",
     key: "avatar",
-    render: (text, record) => (
+    render: ( record:any) => (
       <Avatar
         style={{
           backgroundColor:
@@ -86,10 +74,10 @@ const columns = [
     ),
     dataIndex: "name",
     key: "name",
-    render: (text, record) => (
+    render: ( record:any) => (
       <>
         <Avatar src={record.avatar} style={{ marginRight: "10px" }} />
-        {renderSecondaryText(text)}
+        {renderSecondaryText(Text)}
       </>
     ),
   },
@@ -132,7 +120,7 @@ const columns = [
     ),
     dataIndex: "gender",
     key: "gender",
-    render: (text) => (
+    render: (text:any) => (
       <Tag
         style={{
           fontWeight: "bold",
@@ -221,8 +209,8 @@ const columns = [
 ];
 
 const Employees = () => {
-  const [searchText, setSearchText] = useState("");
-  const [filterDepartment, setFilterDepartment] = useState("");
+  // const [searchText, setSearchText] = useState("");
+  // const [filterDepartment, setFilterDepartment] = useState("");
 
   // const handleSearch = (event) => {
   //   setSearchText(event.target.value.toLowerCase());
@@ -232,20 +220,20 @@ const Employees = () => {
   //   setFilterDepartment(value);
   // };
 
-  const handleRefresh = () => {
-    setSearchText("");
-    setFilterDepartment("");
-  };
+  // const handleRefresh = () => {
+  //   setSearchText("");
+  //   setFilterDepartment("");
+  // };
 
-  const filteredData = employeesData.filter((employee) => {
-    if (searchText && !employee.name.toLocaleLowerCase().includes(searchText)) {
-      return false;
-    }
-    if (filterDepartment && employee.department !== filterDepartment) {
-      return false;
-    }
-    return true;
-  });
+  // const filteredData = employeesData.filter((employee) => {
+  //   if (searchText && !employee.name.toLocaleLowerCase().includes(searchText)) {
+  //     return false;
+  //   }
+  //   if (filterDepartment && employee.department !== filterDepartment) {
+  //     return false;
+  //   }
+  //   return true;
+  // });
 
   return (
     <>
@@ -257,7 +245,7 @@ const Employees = () => {
             </Title>
           </>
         }
-        footerContent={<div>Home Page Footer</div>}
+        // footerContent={<div>Home Page Footer</div>}
       >
         <div
           style={{
@@ -266,13 +254,13 @@ const Employees = () => {
             boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
           }}
         >
-          <TableInput
+          {/* <TableInput
             searchText={searchText}
             setSearchText={setSearchText}
             filterDepartment={filterDepartment}
             setFilterDepartment={setFilterDepartment}
             handleRefresh={handleRefresh}
-          />
+          /> */}
         </div>
 
         <div
@@ -282,7 +270,7 @@ const Employees = () => {
         >
           <Table
             size="large"
-            dataSource={filteredData}
+            // dataSource={filteredData}
             columns={columns}
             scroll={{
               x: "max-content",

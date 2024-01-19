@@ -1,17 +1,15 @@
-import React from "react";
-import { Layout, Space, Avatar, Typography, Button } from "antd";
-import SideNav from "./LayoutMainComponents/SideNav";
 import {
-  UserOutlined,
-  LogoutOutlined,
   UploadOutlined,
+  UserOutlined
 } from "@ant-design/icons";
+import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { Link } from 'react-router-dom';
-import { CSideHeader, CHeader, CSider, CContent } from "./PayLayoutStyle";
-const { Header, Footer, Sider, Content } = Layout;
+import SideNav from "./LayoutMainComponents/SideNav";
+import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
+const { Header,  Sider, Content } = Layout;
 const { Title } = Typography;
 
-const PageLayout = ({ children, headerContent, footerContent }) => {
+const PageLayout = ({ children, headerContent }: { children: any; headerContent: any }) => {
   return (
     <>
       <Layout style={{ height: "100vh", overflow: "initial" }}>
@@ -40,7 +38,7 @@ const PageLayout = ({ children, headerContent, footerContent }) => {
             {/* <Button type="primary" size={"large"} icon={<LogoutOutlined />} /> */}
             <Link to="/">
             <Button
-              type="ghost" // set type to "ghost"
+              // type="ghost" // set type to "ghost"
               size={"large"}
               icon={<UploadOutlined style={{ fontSize: "200%" }} />}
               style={{

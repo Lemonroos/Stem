@@ -1,14 +1,13 @@
 
 
-import React, { useState } from "react";
-import { Steps, Form, Input, Button, Typography, Space } from "antd";
+import { Button, Form, Steps, Typography } from "antd";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import PageLayout from "../../ProjectLayOut/PageLayout";
 import Step1 from "./Create/StepForm/Step1";
 import Step2 from "./Create/StepForm/Step2";
-import employeesData from "../../data/employeesData";
 
-const { Title, Text } = Typography;
+const { Title} = Typography;
 const { Step } = Steps;
 
 const steps = [
@@ -73,7 +72,7 @@ const Create = () => {
             </Title>
           </>
         }
-        footerContent={<div>Home Page Footer</div>}
+        // footerContent={<div>Home Page Footer</div>}
       >
         <Steps current={currentStep} style={{ marginBottom: "30px" }}>
           {steps.map((step) => (

@@ -1,44 +1,42 @@
-import React from "react";
-import { Table, Button, Typography, Space, Badge, Divider } from "antd";
 import {
-  EllipsisOutlined,
-  PlusOutlined,
-  UserOutlined,
-  ContactsOutlined,
-  PhoneOutlined,
-  CaretUpFilled,
-  MoreOutlined,
   ArrowUpOutlined,
+  ContactsOutlined,
+  EllipsisOutlined,
+  MoreOutlined,
   NumberOutlined,
+  PhoneOutlined,
+  PlusOutlined,
+  UserOutlined
 } from "@ant-design/icons";
+import { Badge, Button, Space, Table, Typography } from "antd";
 import PageLayout from "../../ProjectLayOut/PageLayout";
-import departmentsData from "../../data/departmentsData";
-import employeesData from "../../data/employeesData";
 import {
   getColor,
   renderSecondaryText,
   renderSecondaryTextUnderline,
 } from "../../Utils/Utilities";
-function findManager(department) {
+import departmentsData from "../../data/departmentsData";
+import employeesData from "../../data/employeesData";
+function findManager(department: any) {
   return employeesData.find(
     (employee) =>
       employee.department === department && employee.role === "manager"
   );
 }
 
-function updateEmployeeCount(departmentsData, employeesData) {
-  departmentsData.forEach((department) => {
+function updateEmployeeCount(departmentsData: any, employeesData: any) {
+  departmentsData.forEach((department: any) => {
     department.employees = employeesData.filter(
-      (employee) => employee.department === department.name
+      (employee: any) => employee.department === department.name
     ).length;
   });
 }
-const { Title, Text } = Typography;
+const { Title } = Typography;
 // const  renderSecondaryText = (text) => (
 // <Typography.Text strong>{text}</Typography.Text>
 // );
 
-const columns = [
+const columns: any = [
   {
     title: "",
     dataIndex: "",
@@ -60,7 +58,7 @@ const columns = [
     ),
     dataIndex: "name",
     key: "name",
-    render: (text) => (
+    render: (text: any) => (
       <Space>
         <Badge color={getColor(text)} />
         {renderSecondaryTextUnderline(text)}
@@ -85,7 +83,7 @@ const columns = [
 
     dataIndex: "manager",
     key: "manager",
-    render: (text, record) => {
+    render: (record: any) => {
       const manager = findManager(record.name);
       return manager ? renderSecondaryText(manager.name) : null;
     },
@@ -95,11 +93,11 @@ const columns = [
         text: manager.name,
         value: manager.name,
       })),
-    onFilter: (value, record) => {
+    onFilter: (value: any, record: any) => {
       const manager = findManager(record.name);
       return manager && manager.name.indexOf(value) === 0;
     },
-    sorter: (a, b) => a.manager.length - b.manager.length,
+    sorter: (a: any, b: any) => a.manager.length - b.manager.length,
     sortDirections: ["ascend"],
     filterIcon: <MoreOutlined style={{ fontSize: "18px" }} />,
   },
@@ -123,7 +121,7 @@ const columns = [
     ),
     dataIndex: "email",
     key: "email",
-    render: (text, record) => {
+    render: (record: any) => {
       const manager = findManager(record.name);
       return manager ? renderSecondaryText(manager.email) : null;
     },
@@ -137,7 +135,7 @@ const columns = [
     ),
     dataIndex: "phone",
     key: "phone",
-    render: (text, record) => {
+    render: (record: any) => {
       const manager = findManager(record.name);
       return manager ? renderSecondaryText(manager.phone) : null;
     },
@@ -156,7 +154,7 @@ const Departments = () => {
             </Title>
           </>
         }
-        footerContent={<div>Home Page Footer</div>}
+        // footerContent={<div>Home Page Footer</div>}
       >
         <div
           style={{
