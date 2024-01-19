@@ -1,4 +1,4 @@
-export const CSideHeader = {
+export const CSideHeader: any = {
   // color: "#fff",
   height: 50,
   width: 300,
@@ -27,7 +27,7 @@ export const CHeader = {
   // boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
   zIndex: 6,
 };
-export const CContent = {
+export const CContent:any = {
   position: "",
   paddingTop: "5vh",
   // bottom:100,
@@ -41,7 +41,7 @@ export const CContent = {
   backgroundColor: "#fff",
 };
 
-export const CSider = {
+export const CSider:any = {
   overflow: "auto",
   height: "auto",
   position: "fixed",

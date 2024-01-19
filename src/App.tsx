@@ -34,18 +34,15 @@
 
 // export default App
 
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import AnimatedCursor from "react-animated-cursor";
-import Home from "./Components/Pages/Home/Home";
 import Dashboard from "./Components/Dashboard";
-import Departments from "./Components/Pages/Departments/Departments";
-import Employees from "./Components/Pages/Employees/Employees";
 import EmpContract from "./Components/Pages/Contract/EmpContract";
 import UserContract from "./Components/Pages/Contract/UserContract";
+import Departments from "./Components/Pages/Departments/Departments";
 import Create from "./Components/Pages/Employees/Create";
-import StepForm from "./Components/Pages/Employees/Create/StepForm";
+import Employees from "./Components/Pages/Employees/Employees";
+import Home from "./Components/Pages/Home/Home";
 
 function App() {
   return (

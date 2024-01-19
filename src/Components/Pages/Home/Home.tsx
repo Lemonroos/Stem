@@ -1,22 +1,22 @@
-import React, { useState } from "react";
 import {
-  Form,
-  Input,
-  Button,
-  Card,
-  Row,
-  Col,
-  Typography,
-  Avatar,
-  Checkbox,
-  Divider,
-} from "antd";
-import {
-  UserOutlined,
-  LockOutlined,
   EyeInvisibleOutlined,
   EyeTwoTone,
+  LockOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
+import {
+  Avatar,
+  Button,
+  Card,
+  Checkbox,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Typography,
+} from "antd";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
@@ -141,11 +141,11 @@ const Home = () => {
           <Row justify="center">
             <Col span={24}>
               <Button
-                type="ghost"
+                // type="ghost"
                 icon={<Avatar size="small" src="/Shared/ggIcon.svg" />}
                 style={{
                   width: "100%",
-                  color: "white",
+                  color: "black",
                   borderTopColor: "red",
                   borderRightColor: "blue",
                   borderBottomColor: "green",

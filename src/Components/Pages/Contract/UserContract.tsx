@@ -1,13 +1,10 @@
-import React from "react";
-import { Typography, Space, Row, Col } from "antd";
+import { Col, Row, Typography } from "antd";
 import PageLayout from "../../ProjectLayOut/PageLayout";
-import empContractData from "../../data/userContractData";
 import {
-  getColor,
-  renderBoldText,
-  formatDate,
   formatCurrency,
+  formatDate
 } from "../../Utils/Utilities";
+import empContractData from "../../data/userContractData";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -51,7 +48,7 @@ const Employees = () => {
             </Title>
           </>
         }
-        footerContent={<div>Home Page Footer</div>}
+        // footerContent={<div>Home Page Footer</div>}
       >
         <div>
           {/* <Space direction="vertical"> */}

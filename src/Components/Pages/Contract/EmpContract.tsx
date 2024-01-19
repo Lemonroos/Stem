@@ -10,15 +10,14 @@ import {
   Avatar,
   Badge,
   Button,
-  Select,
+  
   Space,
   Table,
   Tag,
   Typography
 } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import PageLayout from "../../ProjectLayOut/PageLayout";
-import TableInput from "../../TableInput/TableInputLayout";
 import {
   formatDate2,
   getColor,
@@ -28,9 +27,9 @@ import {
   renderSecondaryTextUnderline,
 } from "../../Utils/Utilities";
 import empContractData from "../../data/empContractData";
-const { Option } = Select;
+// const { Option } = Select;
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const columns = [
   {
     title: "",
@@ -54,7 +53,7 @@ const columns = [
     ),
     dataIndex: "name",
     key: "name",
-    render: (text:any, record:any) => (
+    render: (text: any, record: any) => (
       <>
         <Avatar src={record.avatar} style={{ marginRight: "10px" }} />
         {renderSecondaryText(text)}
@@ -70,7 +69,7 @@ const columns = [
     ),
     dataIndex: "contractType",
     key: "contractType",
-    render: (text:any) => (
+    render: (text: any) => (
       <Space>
         <Badge color={getColor(text)} />
         {renderSecondaryTextUnderline(text)}
@@ -86,7 +85,7 @@ const columns = [
     ),
     dataIndex: "status",
     key: "status",
-    render: (text:any) => (
+    render: (text: any) => (
       <Tag
         style={{
           fontWeight: "bold",
@@ -108,7 +107,7 @@ const columns = [
     ),
     dataIndex: "salType",
     key: "salType",
-    render: (text:any) => (
+    render: (text: any) => (
       <Tag
         style={{
           fontWeight: "bold",
@@ -141,7 +140,7 @@ const columns = [
     ),
     dataIndex: "from",
     key: "from",
-    render: (text:any) => renderSecondaryText(formatDate2(text)),
+    render: (text: any) => renderSecondaryText(formatDate2(text)),
   },
   {
     title: (
@@ -152,7 +151,7 @@ const columns = [
     ),
     dataIndex: "to",
     key: "to",
-    render: (text:any) => renderSecondaryText(formatDate2(text)),
+    render: (text: any) => renderSecondaryText(formatDate2(text)),
   },
   {
     title: (
@@ -207,7 +206,7 @@ const columns = [
     ),
     dataIndex: "createdDate",
     key: "createdDate",
-    render: (text:any) => renderSecondaryText(formatDate2(text)),
+    render: (text: any) => renderSecondaryText(formatDate2(text)),
   },
   {
     title: (
@@ -218,12 +217,12 @@ const columns = [
     ),
     dataIndex: "changedDate",
     key: "changedDate",
-    render: (text:any) => renderSecondaryText(formatDate2(text)),
+    render: (text: any) => renderSecondaryText(formatDate2(text)),
   },
 ];
 
 const EmployeeContract = () => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText] = useState("");
 
   const filteredData = empContractData.filter((empContract) => {
     if (
@@ -244,7 +243,7 @@ const EmployeeContract = () => {
             </Title>
           </>
         }
-        footerContent={<div>Home Page Footer</div>}
+        // footerContent={<div>Home Page Footer</div>}
       >
         <div
           style={{

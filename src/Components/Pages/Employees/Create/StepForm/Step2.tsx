@@ -1,7 +1,6 @@
 // Step2.js
-import React from "react";
-import { Form, Input, Row, Col, Radio, Select, DatePicker } from "antd";
-import { CaretDownOutlined, FilterOutlined } from "@ant-design/icons";
+import { CaretDownOutlined } from "@ant-design/icons";
+import { Col, DatePicker, Form, Input, Radio, Row, Select } from "antd";
 const { Option } = Select;
 
 const Step2 = ({ }) => (

@@ -1,6 +1,4 @@
-import React from "react";
-import { Typography, Button } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
 import PageLayout from "./ProjectLayOut/PageLayout";
 const { Title } = Typography;
 
@@ -16,7 +14,7 @@ const Dashboard = () => {
           
           </>
         }
-        footerContent={<div>Home Page Footer</div>}
+        // footerContent={<div>Home Page Footer</div>}
       >
         {/* page-specific content goes here */}
         <div>Dashboard</div>
