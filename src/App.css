@@ -1,0 +1,143 @@
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  transition: width 0.2s ease-in-out;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a9a9a9;
+  border-radius: 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d3d3d3;
+}
+
+.offset-pagination .ant-table-pagination {
+  position: relative; /* Set the position to relative */
+  top: 60px; /* Offset the pagination to the bottom */
+}
+
+.my-table .ant-pagination-item-active {
+  display: none;
+  /* position:relative; */
+  /* Hide the active page number */
+}
+.ant-space-item {
+  font-size: 15px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* font-weight: 500; */
+  /* color: #767676; */
+}
+.ant-menu-submenu-title-content {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 180px;
+}
+.ant-typography {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* font-size: 18px; */
+}
+
+/* .ant-menu,
+.ant-menu-submenu {
+  background-color: #fff !important;
+} */
+
+.ant-menu-item {
+  font-size: 15px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  color: #767676;
+  /* background-color: #fff; */
+}
+
+.App {
+  font-size: 18px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  font-weight: 500;
+  /* cursor: none !important; */
+}
+
+/* .sider-title {
+  margin: 0;
+  font-size: 1px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  font-weight: 500;
+} */
+.sider-title .ant-menu-submenu-title {
+  margin: 0;
+  font-family: "revert-layer";
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ant-menu-submenu-title h5 {
+  margin: 0;
+  /* font-family: "revert-layer"; */
+  font-size: 14px !important;
+  /* font-weight: bold !important; */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  font-weight: 700;
+}
+
+.ant-table-column-sorter {
+  display: none;
+}
+
+.my-table .ant-pagination-item {
+  display: none;
+}
+.table-content .ant-table-content {
+  height: 55vh;
+}
+.user-title-3 {
+  color: #015cd5 !important;
+}
+.user-title-4 {
+  margin: 0;
+  color: #5071d5 !important;
+}
+.ant-steps-item-icon {
+  background-color: #015cd5 !important;
+}
+.ant-steps-icon {
+  color: #f1f1f1 !important;
+}
+.custom-form-item .ant-form-item-label {
+  flex: 0 0 100%;
+  text-align: left;
+}
+
+.custom-form-item .ant-form-item-control {
+  flex: 0 0 100%;
+}
+
+.space {
+  display: flex;
+  justify-content: space-between;
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+.ant-form-item-control-input:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
