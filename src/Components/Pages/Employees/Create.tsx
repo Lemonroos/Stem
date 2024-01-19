@@ -99,7 +99,7 @@ const Create = () => {
                 type="primary"
                 // htmlType="submit"
               >
-                <Link to="/employees">Hoàn thành</Link>
+                <Link to="/employees">Cumplete</Link>
               </Button>
             ) : (
               <Button type="primary" onClick={nextStep}>
