@@ -31,7 +31,7 @@ const ProgramGroups = () => {
                 headerContent={
                     <>
                         <Title level={3} style={{ color: "#000", marginTop: 0 }}>
-                            Groups in Programs
+                            Groups in Programs Hehe
                         </Title>
                     </>
                 }
