@@ -4,15 +4,16 @@ import {
 } from "antd";
 import PageLayout from "../../ProjectLayOut/PageLayout";
 import { useEffect, useState } from "react";
-
-const { Title, Text } = Typography;
+// import { GroupList } from "../../models/Groups";
+import { Programs } from "../../models/Programs";
+const { Title } = Typography;
 
 
 const ProgramGroups = () => {
     const progUrl = "https://stem-backend.vercel.app/program";
-    const [programs, setPrograms] = useState([]);
-    function fetchPrograms(){
-         fetch(progUrl)
+    const [programs, setPrograms] = useState<Programs[]>([]);
+    function fetchPrograms() {
+        fetch(progUrl)
             .then((res) => res.json()) // Parse the response as JSON
             .then((data) => {
                 setPrograms(data); // Log the data to the console
@@ -23,7 +24,7 @@ const ProgramGroups = () => {
     }
     useEffect(() => {
         fetchPrograms()
-    },[])
+    }, [])
     return (
         <>
             <PageLayout
@@ -46,9 +47,9 @@ const ProgramGroups = () => {
 
                 <div
                 >
-                    <Card title="Current Programs" loading={programs.length==0}>
+                    <Card title="Current Programs" loading={programs.length == 0}>
                         {programs.map((program) =>
-                            <Card type="inner" title={program.Name} extra={<a href="#" > More</a>}>
+                            <Card type="inner" title={program?.Name} extra={<a href="#" > More</a>}>
                                 Groups: 50
                             </Card>
                         )}

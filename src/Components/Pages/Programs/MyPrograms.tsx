@@ -4,7 +4,7 @@ import {
 } from "antd";
 import PageLayout from "../../ProjectLayOut/PageLayout";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 
 const MyPrograms = () => {
