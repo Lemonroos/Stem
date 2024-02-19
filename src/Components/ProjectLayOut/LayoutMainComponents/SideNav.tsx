@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import { Menu} from "antd";
 import { useEffect, useState } from "react";
+import { HiUserGroup } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 // const { SubMenu, Item } = Menu;
 // const { Title } = Typography;
@@ -79,6 +80,8 @@ export default function SideNav() {
     getItem("TUYỂN DỤNG", "sub7", <MailOutlined />, [
       getItem("Danh sách ứng viên", "16","",""),
     ]),
+    getItem(<Link to="/groups">Group management (For Managers)</Link>, "17", <HiUserGroup />,""),
+    getItem(<Link to="/programs/myPrograms">My Programs (For Student/teacher)</Link>, "18", <HomeOutlined />,""),
   ];
 
   return (

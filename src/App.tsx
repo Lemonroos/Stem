@@ -43,6 +43,8 @@ import Departments from "./Components/Pages/Departments/Departments";
 import Create from "./Components/Pages/Employees/Create";
 import Employees from "./Components/Pages/Employees/Employees";
 import Home from "./Components/Pages/Home/Home";
+import GroupList from "./Components/Pages/Groups/GroupList";
+import MyPrograms from "./Components/Pages/Programs/MyPrograms";
 
 function App() {
   return (
@@ -77,6 +79,8 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/empcontract" element={<EmpContract />} />
         <Route path="/usercontract" element={<UserContract />} />
+        <Route path="/groups" element={<GroupList />} />
+        <Route path="/programs/myPrograms" element={<MyPrograms />} />
       </Routes>
     </div>
   );
