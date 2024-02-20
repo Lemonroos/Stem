@@ -1,12 +1,12 @@
 import {
     Card,
-    Typography
+    // Typography
 } from "antd";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 import { useEffect, useState } from "react";
 // import { GroupList } from "../../models/Groups";
 import { Programs } from "../../models/Programs";
-const { Title } = Typography;
+// const { Title } = Typography;
 
 
 const ProgramGroups = () => {
@@ -27,7 +27,7 @@ const ProgramGroups = () => {
     }, [])
     return (
         <>
-            <PageLayout
+            {/* <PageLayout
                 headerContent={
                     <>
                         <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -43,7 +43,7 @@ const ProgramGroups = () => {
                         boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
                     }}
                 >
-                </div>
+                </div> */}
 
                 <div
                 >
@@ -55,7 +55,7 @@ const ProgramGroups = () => {
                         )}
                     </Card >
                 </div >
-            </PageLayout >
+            {/* </PageLayout > */}
         </>
     );
 };

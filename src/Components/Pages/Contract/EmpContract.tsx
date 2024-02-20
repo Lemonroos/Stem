@@ -14,10 +14,10 @@ import {
   Space,
   Table,
   Tag,
-  Typography
+  // Typography
 } from "antd";
 import { useState } from "react";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 import {
   formatDate2,
   getColor,
@@ -29,7 +29,7 @@ import {
 import empContractData from "../../data/empContractData";
 // const { Option } = Select;
 
-const { Title } = Typography;
+// const { Title } = Typography;
 const columns = [
   {
     title: "",
@@ -235,7 +235,7 @@ const EmployeeContract = () => {
   });
   return (
     <>
-      <PageLayout
+      {/* <PageLayout
         headerContent={
           <>
             <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -244,7 +244,7 @@ const EmployeeContract = () => {
           </>
         }
         // footerContent={<div>Home Page Footer</div>}
-      >
+      > */}
         <div
           style={{
             margin: "0 0 10px 0",
@@ -283,7 +283,7 @@ const EmployeeContract = () => {
             className="my-table table-content offset-pagination"
           />
         </div>
-      </PageLayout>
+      {/* </PageLayout> */}
     </>
   );
 };

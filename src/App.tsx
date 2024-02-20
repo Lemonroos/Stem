@@ -36,15 +36,17 @@
 
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./Components/Dashboard";
-import EmpContract from "./Components/Pages/Contract/EmpContract";
-import UserContract from "./Components/Pages/Contract/UserContract";
-import Departments from "./Components/Pages/Departments/Departments";
-import Create from "./Components/Pages/Employees/Create";
-import Employees from "./Components/Pages/Employees/Employees";
-import Home from "./Components/Pages/Home/Home";
-import GroupList from "./Components/Pages/Groups/GroupList";
-import MyPrograms from "./Components/Pages/Programs/MyPrograms";
+import MainLayout from "./Components/MainLayout";
+import Login from "./Components/Pages/Login/Login";
+// import Dashboard from "./Components/Dashboard";
+// import EmpContract from "./Components/Pages/Contract/EmpContract";
+// import UserContract from "./Components/Pages/Contract/UserContract";
+// import Departments from "./Components/Pages/Departments/Departments";
+// import Create from "./Components/Pages/Employees/Create";
+// import Employees from "./Components/Pages/Employees/Employees";
+// import Home from "./Components/Pages/Home/Home";
+// import GroupList from "./Components/Pages/Groups/GroupList";
+// import MyPrograms from "./Components/Pages/Programs/MyPrograms";
 
 function App() {
   return (
@@ -72,7 +74,9 @@ function App() {
         ]}
       /> */}
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/*" element={<MainLayout/>} />
+        <Route path="/login" element={<Login/>} />
+        {/* <Route path="/" element={<Home/>} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/departments" element={<Departments />} />
         <Route path="/employees" element={<Employees />} />
@@ -80,7 +84,7 @@ function App() {
         <Route path="/empcontract" element={<EmpContract />} />
         <Route path="/usercontract" element={<UserContract />} />
         <Route path="/groups" element={<GroupList />} />
-        <Route path="/programs/myPrograms" element={<MyPrograms />} />
+        <Route path="/programs/myPrograms" element={<MyPrograms />} /> */}
       </Routes>
     </div>
   );

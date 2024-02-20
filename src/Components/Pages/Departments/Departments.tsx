@@ -8,8 +8,8 @@ import {
   PlusOutlined,
   UserOutlined
 } from "@ant-design/icons";
-import { Badge, Button, Space, Table, Typography } from "antd";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+import { Badge, Button, Space, Table } from "antd";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 import {
   getColor,
   renderSecondaryText,
@@ -31,7 +31,7 @@ function updateEmployeeCount(departmentsData: any, employeesData: any) {
     ).length;
   });
 }
-const { Title } = Typography;
+// const { Title } = Typography;
 // const  renderSecondaryText = (text) => (
 // <Typography.Text strong>{text}</Typography.Text>
 // );
@@ -146,7 +146,7 @@ const Departments = () => {
   updateEmployeeCount(departmentsData, employeesData);
   return (
     <>
-      <PageLayout
+      {/* <PageLayout
         headerContent={
           <>
             <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -155,41 +155,41 @@ const Departments = () => {
           </>
         }
         // footerContent={<div>Home Page Footer</div>}
+      > */}
+      <div
+        style={{
+          padding: "1% 0 5px 0",
+          margin: "0 0 10px 0",
+          borderBottom: "1px solid #ccc",
+          textAlign: "right",
+        }}
       >
-        <div
-          style={{
-            padding: "1% 0 5px 0",
-            margin: "0 0 10px 0",
-            borderBottom: "1px solid #ccc",
-            textAlign: "right",
-          }}
-        >
-          <Button type="primary" size={"large"} icon={<PlusOutlined />}>
-            Thêm Phòng Ban
-          </Button>
-        </div>
+        <Button type="primary" size={"large"} icon={<PlusOutlined />}>
+          Thêm Phòng Ban
+        </Button>
+      </div>
 
-        <div>
-          <Table
-            size="large"
-            dataSource={departmentsData}
-            columns={columns}
-            scroll={{
-              x: "max-content",
-            }}
-            style={{
-              border: "1px solid #ccc",
-              boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
-            }}
-            pagination={{
-              showTotal: (total, range) =>
-                `${range[0]}-${range[1]} of ${total}`,
-              pageSize: 6,
-            }}
-            className="my-table"
-          />
-        </div>
-      </PageLayout>
+      <div>
+        <Table
+          size="large"
+          dataSource={departmentsData}
+          columns={columns}
+          scroll={{
+            x: "max-content",
+          }}
+          style={{
+            border: "1px solid #ccc",
+            boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
+          }}
+          pagination={{
+            showTotal: (total, range) =>
+              `${range[0]}-${range[1]} of ${total}`,
+            pageSize: 6,
+          }}
+          className="my-table"
+        />
+      </div>
+      {/* </PageLayout> */}
     </>
   );
 };

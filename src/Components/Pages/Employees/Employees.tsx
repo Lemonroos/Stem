@@ -13,10 +13,10 @@ import {
   Space,
   Table,
   Tag,
-  Typography
+  // Typography
 } from "antd";
 // import { useState } from "react";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 // import TableInput from "../../TableInput/TableInputLayout";
 import {
   renderSecondaryText
@@ -25,7 +25,7 @@ import {
 // const { Option } = Select;
 // const { Search } = Input;
 
-const { Title, Text } = Typography;
+// const { Title, Text } = Typography;
 // const  renderSecondaryText = (text) => (
 // <Typography.Text strong>{text}</Typography.Text>
 // );
@@ -237,7 +237,7 @@ const Employees = () => {
 
   return (
     <>
-      <PageLayout
+      {/* <PageLayout
         headerContent={
           <>
             <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -246,7 +246,7 @@ const Employees = () => {
           </>
         }
         // footerContent={<div>Home Page Footer</div>}
-      >
+      > */}
         <div
           style={{
             margin: "0 0 10px 0",
@@ -290,7 +290,7 @@ const Employees = () => {
             // rowKey={record => record.id}
           />
         </div>
-      </PageLayout>
+      {/* </PageLayout> */}
     </>
   );
 };
