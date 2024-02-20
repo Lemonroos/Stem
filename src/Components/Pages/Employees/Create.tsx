@@ -1,13 +1,13 @@
 
 
-import { Button, Form, Steps, Typography } from "antd";
+import { Button, Form, Steps } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 import Step1 from "./Create/StepForm/Step1";
 import Step2 from "./Create/StepForm/Step2";
 
-const { Title} = Typography;
+// const { Title} = Typography;
 const { Step } = Steps;
 
 const steps = [
@@ -64,7 +64,7 @@ const Create = () => {
 
   return (
     <>
-      <PageLayout
+      {/* <PageLayout
         headerContent={
           <>
             <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -73,7 +73,7 @@ const Create = () => {
           </>
         }
         // footerContent={<div>Home Page Footer</div>}
-      >
+      > */}
         <Steps current={currentStep} style={{ marginBottom: "30px" }}>
           {steps.map((step) => (
             <Step key={step.title} title={step.title} />
@@ -107,7 +107,7 @@ const Create = () => {
             )}
           </div>
         </Form>
-      </PageLayout>
+      {/* </PageLayout> */}
     </>
   );
 };

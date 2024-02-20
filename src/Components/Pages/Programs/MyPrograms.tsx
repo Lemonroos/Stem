@@ -1,17 +1,17 @@
 import {
     Card,
-    Typography
+    // Typography
 } from "antd";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 
-const { Title } = Typography;
+// const { Title } = Typography;
 
 
 const MyPrograms = () => {
 
     return (
         <>
-            <PageLayout
+            {/* <PageLayout
                 headerContent={
                     <>
                         <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -28,25 +28,25 @@ const MyPrograms = () => {
                         boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
                     }}
                 >
-                </div>
+                </div> */}
 
-                <div
-                >
-                    <Card title="Current Programs">
-                        <Card type="inner" title="Program 1" extra={<a href="#">More</a>}>
-                            Groups: 50
-                        </Card>
-                        <Card
-                            style={{ marginTop: 16 }}
-                            type="inner"
-                            title="Program 2"
-                            extra={<a href="#">More</a>}
-                        >
-                            Groups: 45
-                        </Card>
+            <div
+            >
+                <Card title="Current Programs">
+                    <Card type="inner" title="Program 1" extra={<a href="#">More</a>}>
+                        Groups: 50
                     </Card>
-                </div>
-            </PageLayout>
+                    <Card
+                        style={{ marginTop: 16 }}
+                        type="inner"
+                        title="Program 2"
+                        extra={<a href="#">More</a>}
+                    >
+                        Groups: 45
+                    </Card>
+                </Card>
+            </div>
+            {/* </PageLayout> */}
         </>
     );
 };

@@ -6,13 +6,16 @@ import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { Link } from 'react-router-dom';
 import SideNav from "./LayoutMainComponents/SideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
-const { Header,  Sider, Content } = Layout;
+import RouterPaths from "../Routes/Router";
+const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
-const PageLayout = ({ children, headerContent }: { children: any; headerContent: any }) => {
+const PageLayout = () => {
+  // const [headerContent,setHeaderContent] = useState(null)
   return (
     <>
       <Layout style={{ height: "100vh", overflow: "initial" }}>
+        {/* AVATAR's header */}
         <Header style={CSideHeader}>
           <Space align="center" size={"small"} direction="horizontal">
             <Avatar
@@ -32,11 +35,18 @@ const PageLayout = ({ children, headerContent }: { children: any; headerContent:
         </Sider>
 
         <Layout style={{ marginLeft: 300 }}>
-          {/* 300 */}
+
+          
           <Header style={CHeader}>
-            {headerContent}
+            {/* <Title level={3} style={{ color: "#000", marginTop: 0 }}>
+            {headerContent} This is the header
+            </Title> */}
             {/* <Button type="primary" size={"large"} icon={<LogoutOutlined />} /> */}
-            <Link to="/">
+
+
+            <Link to="/login">
+               {/* Tạm thời route login, mốt route lại logout handler z đó */}
+
             <Button
               // type="ghost" // set type to "ghost"
               size={"large"}
@@ -58,13 +68,16 @@ const PageLayout = ({ children, headerContent }: { children: any; headerContent:
             </Button>
             </Link>
           </Header>
+
+          
           <Content style={CContent}>
             <div
               style={{
-                padding: "0 10% 0 10%",
+                padding: "0 5% 0 5%",
               }}
             >
-              {children}
+              {/* {children} */}
+              <RouterPaths />
             </div>
           </Content>
           {/* <Footer style={footerStyle}>{footerContent}</Footer> */}

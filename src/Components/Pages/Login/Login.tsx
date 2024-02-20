@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-const Home = () => {
+const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleRememberMeChange = (e: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
@@ -164,4 +164,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;

@@ -1,5 +1,5 @@
 import { Col, Row, Typography } from "antd";
-import PageLayout from "../../ProjectLayOut/PageLayout";
+// import PageLayout from "../../ProjectLayOut/PageLayout";
 import {
   formatCurrency,
   formatDate
@@ -40,7 +40,7 @@ const Employees = () => {
 
   return (
     <>
-      <PageLayout
+      {/* <PageLayout
         headerContent={
           <>
             <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -49,7 +49,7 @@ const Employees = () => {
           </>
         }
         // footerContent={<div>Home Page Footer</div>}
-      >
+      > */}
         <div>
           {/* <Space direction="vertical"> */}
 
@@ -292,7 +292,7 @@ const Employees = () => {
             </Col>
           </Row>
         </div>
-      </PageLayout>
+      {/* </PageLayout> */}
     </>
   );
 };

@@ -1,11 +1,11 @@
-import { Typography } from "antd";
-import PageLayout from "./ProjectLayOut/PageLayout";
-const { Title } = Typography;
+// import { Typography } from "antd";
+// import PageLayout from "./ProjectLayOut/PageLayout";
+// const { Title } = Typography;
 
 const Dashboard = () => {
   return (
     <>
-      <PageLayout
+      {/* <PageLayout
         headerContent={
           <>
             <Title level={3} style={{ color: "#000", marginTop: 0 }}>
@@ -15,10 +15,10 @@ const Dashboard = () => {
           </>
         }
         // footerContent={<div>Home Page Footer</div>}
-      >
+      > */}
         {/* page-specific content goes here */}
         <div>Dashboard</div>
-      </PageLayout>
+      {/* </PageLayout> */}
     </>
   );
 };
