@@ -72,7 +72,7 @@ const Login = () => {
           <Avatar size={64} icon={<UserOutlined />} />
         </div>
         <Title level={1} style={{ textAlign: "center", color: "#fff" }}>
-          Welcome
+          Welcome to STEM
         </Title>
         <Form>
           <Row>
@@ -123,7 +123,7 @@ const Login = () => {
           <Row>
             <Col span={24}>
               <Form.Item>
-                <Link to="/dashboard">
+                <Link to="/student">
                   <Button
                     type="primary"
                     htmlType="submit"
