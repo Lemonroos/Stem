@@ -3,10 +3,10 @@ import {
   UserOutlined
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import SideNav from "./LayoutMainComponents/SideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
-import RouterPaths from "../Routes/Router";
+// import RouterPaths from "../Routes/Router";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
@@ -77,7 +77,8 @@ const PageLayout = () => {
               }}
             >
               {/* {children} */}
-              <RouterPaths />
+              {/* <RouterPaths /> */}
+              <Outlet />
             </div>
           </Content>
           {/* <Footer style={footerStyle}>{footerContent}</Footer> */}
