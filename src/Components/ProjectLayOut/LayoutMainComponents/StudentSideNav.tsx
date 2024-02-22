@@ -14,18 +14,18 @@ export default function SideNav() {
     location.pathname === "/departments"
       ? "2"
       : location.pathname === "/employees"
-      ? "4"
-      : location.pathname === "/create"
-      ? "5"
-      : location.pathname === "/empcontract"
-      ? "14"
-      : location.pathname === "/usercontract"
-      ? "15"
-      : "1";
+        ? "4"
+        : location.pathname === "/create"
+          ? "5"
+          : location.pathname === "/empcontract"
+            ? "14"
+            : location.pathname === "/usercontract"
+              ? "15"
+              : "1";
 
   // Get the initial state of the submenus from sessionStorage
   const [openKeys, setOpenKeys] = useState(
-    JSON.parse(sessionStorage.getItem("openKeys")as string) || []
+    JSON.parse(sessionStorage.getItem("openKeys") as string) || []
   );
 
   // Save the state of the submenus to sessionStorage whenever it changes
@@ -33,7 +33,7 @@ export default function SideNav() {
     sessionStorage.setItem("openKeys", JSON.stringify(openKeys));
   }, [openKeys]);
 
-  function getItem(label:any, key:any, icon:any, children:any) {
+  function getItem(label: any, key: any, icon: any, children: any) {
     return {
       key,
       icon,
@@ -43,9 +43,9 @@ export default function SideNav() {
   }
 
   const items = [
-    getItem(<Link to="/student">Dashboard</Link>, "1", <HomeOutlined />,""),
-    getItem(<Link to="/student/groups">Group management (For Managers)</Link>, "2", <HiUserGroup />,""),
-    getItem(<Link to="/student/programs/myPrograms">My Programs (For Student/teacher)</Link>, "3", <HomeOutlined />,""),
+    getItem(<Link to="/student">Dashboard</Link>, "1", <HomeOutlined />, ""),
+    getItem(<Link to="/student/my-groups">My Groups</Link>, "2", <HiUserGroup />, ""),
+    getItem(<Link to="/student/my-programs">My Programs</Link>, "3", <HomeOutlined />, ""),
   ];
 
   return (
