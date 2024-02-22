@@ -70,19 +70,37 @@ export const routes = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       {
-        path: "employees",
-        element: <Employees />,
+        path: "details",
+        element: <Employees />
+        // student account details (info)
+        ,
       },
-      { path: "groups", element: <GroupList /> },
+      {
+        path: "my-groups", element: <GroupList />
+        // MYGROUP
+      },
       {
         path: "programs", element: <MyPrograms />,
+      },
+      {
+        path: "myprograms", element: <MyPrograms />,
         children: [
           {
-            path: "myprograms", element: <MyPrograms />
+            path: ":id", element: <MyPrograms />,
+            children: [
+              {
+                path: "mylabs", element:  <MyPrograms />
+// MY LABS
+              }
+            ]
           }
         ]
       },
     ]
+
+
+
+  
   },
   // {
   //   path: "/teacher",
