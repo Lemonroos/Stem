@@ -1,23 +1,8 @@
-import { Card, Col, Layout, Row, Typography } from 'antd';
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
+import { Card, Col, Layout, Row } from 'antd';
 
-const { Header, Footer, Content } = Layout;
-const { Title } = Typography;
+const { Content } = Layout;
 
 export default function Homepage() {
-    // const newsUrl = 'https://stem-backend.vercel.app/news'
-    // const [news, setNews] = useState<News[]>([])
-
-    // function getNews() {
-    //     axios.get(newsUrl)
-    //         .then(res => res.json())
-    //         .then(data => setNews(data))
-    //         .catch(err => console.log(err))
-    // }
-    // useEffect(() => {
-    //     getNews()
-    // }, [])
     return (
         <Layout style={{ height: '100vh', width: '100vw' }}>
             <Content style={{ padding: '2%' }}>
