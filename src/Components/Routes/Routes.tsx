@@ -80,17 +80,14 @@ export const routes = createBrowserRouter([
         // MYGROUP
       },
       {
-        path: "programs", element: <MyPrograms />,
-      },
-      {
-        path: "myprograms", element: <MyPrograms />,
+        path: "my-programs", element: <MyPrograms />,
         children: [
           {
             path: ":id", element: <MyPrograms />,
             children: [
               {
-                path: "mylabs", element:  <MyPrograms />
-// MY LABS
+                path: "mylabs", element: <MyPrograms />
+                // MY LABS
               }
             ]
           }
@@ -100,7 +97,7 @@ export const routes = createBrowserRouter([
 
 
 
-  
+
   },
   // {
   //   path: "/teacher",

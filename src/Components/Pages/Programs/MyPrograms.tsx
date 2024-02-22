@@ -1,10 +1,8 @@
 import {
     Card,
-    // Typography
+    Col,
+    Row
 } from "antd";
-// import PageLayout from "../../ProjectLayOut/PageLayout";
-
-// const { Title } = Typography;
 
 
 const MyPrograms = () => {
@@ -30,21 +28,24 @@ const MyPrograms = () => {
                 >
                 </div> */}
 
-            <div
-            >
-                <Card title="Current Programs">
-                    <Card type="inner" title="Program 1" extra={<a href="#">More</a>}>
-                        Groups: 50
-                    </Card>
-                    <Card
-                        style={{ marginTop: 16 }}
-                        type="inner"
-                        title="Program 2"
-                        extra={<a href="#">More</a>}
-                    >
-                        Groups: 45
-                    </Card>
-                </Card>
+            <div>
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Card title="Program 1" bordered={false}>
+                            Prog1
+                        </Card>
+                    </Col>
+                    <Col span={8}>
+                        <Card title="Program 2" bordered={false}>
+                            Prog2
+                        </Card>
+                    </Col>
+                    <Col span={8}>
+                        <Card title="Program 3" bordered={false}>
+                            Prog3
+                        </Card>
+                    </Col>
+                </Row>
             </div>
             {/* </PageLayout> */}
         </>
