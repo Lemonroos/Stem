@@ -15,7 +15,7 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    
+
     errorElement: <ErrorPage />,
     // errorElement: <ErrorPage />,
     children: [
@@ -78,23 +78,38 @@ export const routes = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       {
-        path: "employees",
-        element: <Employees />,
+        path: "details",
+        element: <Employees />
+        // student account details (info)
+        ,
       },
+
       {
-        path: "create",
-        element: <Create />,
+        path: "mygroups", element: <GroupList />
+        // MYGROUP
       },
-      { path: "groups", element: <GroupList /> },
       {
         path: "programs", element: <MyPrograms />,
+      },
+      {
+        path: "myprograms", element: <MyPrograms />,
         children: [
           {
-            path: "myprograms", element: <MyPrograms />
+            path: ":id", element: <MyPrograms />,
+            children: [
+              {
+                path: "mylabs", element:  <MyPrograms />
+// MY LABS
+              }
+            ]
           }
         ]
       },
     ]
+
+
+
+  
   },
   {
     path: "/teacher",
