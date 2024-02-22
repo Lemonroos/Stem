@@ -1,9 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Dashboard";
-// import EmpContract from "../Pages/Contract/EmpContract";
-// import UserContract from "../Pages/Contract/UserContract";
-// import Departments from "../Pages/Departments/Departments";
-import Create from "../Pages/Employees/Create";
 import Employees from "../Pages/Employees/Employees";
 import GroupList from "../Pages/Groups/GroupList";
 import MyPrograms from "../Pages/Programs/MyPrograms";
@@ -27,7 +23,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "news",
-        element: <News/>,
+        element: <News />,
       },
       { path: "programs", element: <Programs /> },
       { path: "about-us", element: <AboutUs /> },
@@ -79,9 +75,8 @@ export const routes = createBrowserRouter([
         // student account details (info)
         ,
       },
-
       {
-        path: "mygroups", element: <GroupList />
+        path: "my-groups", element: <GroupList />
         // MYGROUP
       },
       {
