@@ -16,6 +16,7 @@ export const routes = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
 
+
     errorElement: <ErrorPage />,
     children: [
       {
@@ -75,17 +76,21 @@ export const routes = createBrowserRouter([
         // student account details (info)
         ,
       },
+
       {
+
         path: "my-groups", element: <GroupList />
         // MYGROUP
       },
       {
         path: "my-programs", element: <MyPrograms />,
+
         children: [
           {
             path: ":id", element: <MyPrograms />,
             children: [
               {
+
                 path: "mylabs", element: <MyPrograms />
                 // MY LABS
               }
