@@ -28,6 +28,10 @@ const Login = () => {
     setRememberMe(e.target.checked);
   };
 
+  const google = () => {
+    window.open('http://localhost:5000/auth/google', '_self')
+  }
+
   return (
     <div
       style={{
@@ -153,6 +157,7 @@ const Login = () => {
                   display: "flex",
                   justifyContent: "center",
                 }}
+                onClick={google}
               >
                 Log in with Google
               </Button>
