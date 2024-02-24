@@ -39,6 +39,7 @@ const StudentPageLayout = () => {
   console.log(user);
 
 
+
   return (
     <>
       <Layout style={{ height: "100vh" }}>
@@ -50,10 +51,12 @@ const StudentPageLayout = () => {
               size={"large"}
               icon={<UserOutlined />}
               style={{ marginBottom: 20 }}
+
               src={user?.photos?.[0]?.value}
             />
             <Title level={4} style={{ marginTop: 0 }}>
               {user?.displayName}
+
             </Title>
           </Space>
         </Header>
@@ -100,4 +103,7 @@ const StudentPageLayout = () => {
   );
 };
 
+
 export default StudentPageLayout;
+
+
