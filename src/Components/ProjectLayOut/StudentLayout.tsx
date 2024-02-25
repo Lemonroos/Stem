@@ -3,10 +3,10 @@ import {
   UserOutlined
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
-import { useEffect, useState } from "react";
 import { Link, Outlet } from 'react-router-dom';
 import StudentSideNav from "./LayoutMainComponents/StudentSideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
+import { useState, useEffect } from "react";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 

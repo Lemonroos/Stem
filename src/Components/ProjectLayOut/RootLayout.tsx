@@ -1,5 +1,4 @@
 import { Button, Layout, Menu, MenuProps, Typography } from 'antd';
-import React from 'react';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 const { Title } = Typography;
@@ -49,7 +48,7 @@ export default function RootLayout() {
   return (
     <>
       <Header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5%' }}>
-        <Title level={2} style={{ color: 'white' }}>STEM Homepage</Title>
+        <Title level={2} style={{ color: 'white' }}>STEM's Homepage</Title>
         <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
         <Link to="/login">
           <Button type="primary" size="large">

@@ -1,4 +1,5 @@
 import { Card, Col, Layout, Row } from 'antd';
+
 const { Content } = Layout;
 
 export default function Homepage() {
