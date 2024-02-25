@@ -1,6 +1,7 @@
 import { Button, Layout, Menu, MenuProps, Typography } from 'antd';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+
 const { Title } = Typography;
 
 export default function RootLayout() {
@@ -12,7 +13,7 @@ export default function RootLayout() {
           Homepage
         </Link>
       ),
-      key: 'alipay',
+      key: 'homepage',
     },
     {
       label: (
@@ -20,7 +21,7 @@ export default function RootLayout() {
           News
         </Link>
       ),
-      key: 'alipay',
+      key: 'news',
     },
     {
       label: (
@@ -28,7 +29,7 @@ export default function RootLayout() {
           Programs
         </Link>
       ),
-      key: 'alipay',
+      key: 'programs',
     },
     {
       label: (
@@ -36,7 +37,7 @@ export default function RootLayout() {
           About Us
         </Link>
       ),
-      key: 'alipay',
+      key: 'about-us',
     },
   ];
   const [current, setCurrent] = useState('mail');
