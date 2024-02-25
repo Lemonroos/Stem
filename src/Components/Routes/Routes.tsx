@@ -33,6 +33,36 @@ export const routes = createBrowserRouter([
       },
     ],
   },
+  // {
+  //   path: "/admin",
+  //   element: <PageLayout />, 
+  //   errorElement: <ErrorPage />,
+  //   children: [
+  //     // { index: true, element: <HomePage /> },
+  //     {
+  //       path: "dashboard",
+  //       element: <Dashboard />,
+  //     },
+  //     { path: "groups", element: <GroupList /> },
+  //   ]
+  // },
+  // {
+  //   path: "/manager",
+  //   element: <PageLayout />,
+  //   errorElement: <ErrorPage />,
+  //   children: [
+  //     // { index: true, element: <HomePage /> },
+  //     {
+  //       path: "dashboard",
+  //       element: <Dashboard />,
+  //     },
+  //     {
+  //       path: "create",
+  //       element: <Create />,
+  //     },
+  //     { path: "groups", element: <GroupList /> },
+  //   ]
+  // },
   {
     path: "/student",
     element: <StudentLayout />,
@@ -72,4 +102,27 @@ export const routes = createBrowserRouter([
       },
     ],
   },
+  // {
+  //   path: "/teacher",
+  //   element: <PageLayout />,
+  //   errorElement: <ErrorPage />,
+  //   // errorElement: <ErrorPage />,
+  //   children: [
+  //     // { index: true, element: <HomePage /> },
+  //     {
+  //       path: "dashboard",
+  //       element: <Dashboard />,
+  //     },
+  //     {
+  //       path: "employees",
+  //       element: <Employees />,
+  //     },
+  //     {
+  //       path: "create",
+  //       element: <Create />,
+  //     },
+  //     { path: "groups", element: <GroupList /> },
+  //     { path: "programs/myPrograms", element: <MyPrograms /> },
+  //   ]
+  // }
 ]);
