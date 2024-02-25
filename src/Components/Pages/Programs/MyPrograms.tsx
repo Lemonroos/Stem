@@ -3,7 +3,6 @@ import {
     Col,
     Row
 } from "antd";
-import React from "react";
 
 const MyPrograms = () => {
 
