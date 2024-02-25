@@ -2,6 +2,7 @@ import {
   UploadOutlined,
   UserOutlined
 } from "@ant-design/icons";
+import React from "react"
 import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { Link, Outlet } from 'react-router-dom';
 import StudentSideNav from "./LayoutMainComponents/StudentSideNav";
@@ -9,7 +10,7 @@ import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
-const PageLayout = () => {
+const StudentLayout = () => {
   return (
     <>
       <Layout style={{ height: "100vh" }}>
@@ -70,4 +71,4 @@ const PageLayout = () => {
   );
 };
 
-export default PageLayout;
+export default StudentLayout;

@@ -1,25 +1,26 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import RootLayout from "../layout/RootLayout";
+import ErrorPage from "../pages/Error/ErrorPage";
+import Homepage from "../pages/Home/Homepage";
+import News from "../pages/Home/News";
+import Programs from "../pages/Home/Programs";
+import AboutUs from "../pages/Home/AboutUs";
+import Login from "../pages/Login/Login";
+import StudentLayout from "../layout/StudentLayout";
 import Dashboard from "../Dashboard";
-import Employees from "../Pages/Employees/Employees";
-import GroupList from "../Pages/Groups/GroupList";
-import MyPrograms from "../Pages/Programs/MyPrograms";
-import StudentLayout from "../ProjectLayOut/StudentLayout";
-import ErrorPage from "../Pages/Error/ErrorPage"
-import Login from "../Pages/Login/Login";
-import RootLayout from "../ProjectLayOut/RootLayout";
-import Homepage from "../Pages/Home/Homepage";
-import News from "../Pages/Home/News";
-import AboutUs from "../Pages/Home/AboutUs";
-import Programs from "../Pages/Home/Programs";
+import ProgramGroups from "../pages/Groups/GroupList";
+import MyPrograms from "../pages/Programs/MyPrograms";
+
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true, element: <Homepage />,
+        index: true,
+        element: <Homepage />,
       },
       {
         path: "news",
@@ -31,96 +32,44 @@ export const routes = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
-    ]
+    ],
   },
-  // {
-  //   path: "/admin",
-  //   element: <PageLayout />, 
-  //   errorElement: <ErrorPage />,
-  //   children: [
-  //     // { index: true, element: <HomePage /> },
-  //     {
-  //       path: "dashboard",
-  //       element: <Dashboard />,
-  //     },
-  //     { path: "groups", element: <GroupList /> },
-  //   ]
-  // },
-  // {
-  //   path: "/manager",
-  //   element: <PageLayout />,
-  //   errorElement: <ErrorPage />,
-  //   children: [
-  //     // { index: true, element: <HomePage /> },
-  //     {
-  //       path: "dashboard",
-  //       element: <Dashboard />,
-  //     },
-  //     {
-  //       path: "create",
-  //       element: <Create />,
-  //     },
-  //     { path: "groups", element: <GroupList /> },
-  //   ]
-  // },
   {
     path: "/student",
     element: <StudentLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Dashboard /> },
       {
-        path: "details",
-        element: <Employees />
-        // student account details (info)
-        ,
+        index: true,
+        element: <Dashboard />,
       },
       {
-        path: "my-groups", element: <GroupList />
+        path: "details",
+
+        // student account details (info)
+      },
+      {
+        path: "my-groups",
+        element: <ProgramGroups />,
         // MYGROUP
       },
       {
-        path: "my-programs", element: <MyPrograms />,
+        path: "my-programs",
+        element: <MyPrograms />,
         children: [
           {
-            path: ":id", element: <MyPrograms />,
+            path: ":id",
+            element: <MyPrograms />,
             children: [
               {
-                path: "mylabs", element: <MyPrograms />
+                path: "mylabs",
+                element: <MyPrograms />,
                 // MY LABS
-              }
-            ]
-          }
-        ]
+              },
+            ],
+          },
+        ],
       },
-    ]
-
-
-
-
+    ],
   },
-  // {
-  //   path: "/teacher",
-  //   element: <PageLayout />,
-  //   errorElement: <ErrorPage />,
-  //   // errorElement: <ErrorPage />,
-  //   children: [
-  //     // { index: true, element: <HomePage /> },
-  //     {
-  //       path: "dashboard",
-  //       element: <Dashboard />,
-  //     },
-  //     {
-  //       path: "employees",
-  //       element: <Employees />,
-  //     },
-  //     {
-  //       path: "create",
-  //       element: <Create />,
-  //     },
-  //     { path: "groups", element: <GroupList /> },
-  //     { path: "programs/myPrograms", element: <MyPrograms /> },
-  //   ]
-  // }
-]
-)
+]);
