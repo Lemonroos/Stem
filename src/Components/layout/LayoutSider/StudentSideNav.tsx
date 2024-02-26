@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 // const { SubMenu, Item } = Menu;
 // const { Title } = Typography;
 
-export default function SideNav() {
+export default function StudentSideNav() {
   const location = useLocation();
   const selectedKey =
     location.pathname === "/departments"
