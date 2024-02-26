@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Programs } from "../../models/Programs";
 
 const ProgramGroups = () => {
-    const progUrl = "https://stem-backend.vercel.app/program";
+    const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
 
     const [programs, setPrograms] = useState<Programs[]>([]);
 

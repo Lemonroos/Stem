@@ -5,7 +5,7 @@ import { News } from '../../models/News';
 const { Content } = Layout;
 
 export default function Newsfeed() {
-  const newsUrl = 'https://stem-backend.vercel.app/news'
+  const newsUrl = 'https://stem-backend.vercel.app/api/v1/news'
   const [news, setNews] = useState<News[]>([])
   function getNews() {
     axios.get(newsUrl)
