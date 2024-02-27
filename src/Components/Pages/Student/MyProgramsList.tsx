@@ -1,53 +1,48 @@
-import {
-    Card,
-    Col,
-    Row
-} from "antd";
+import { useEffect, useState } from "react";
+import { Card, Col, Row } from "antd";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Programs } from "../../models/Programs";
+
+const { Meta } = Card;
 
 const MyProgramList = () => {
+    const progUrl = 'https://stem-backend.vercel.app/api/v1/programs';
+    const [myPrograms, setMyPrograms] = useState<Programs[]>([]);
+
+    async function getMyPrograms() {
+        try {
+            const response = await axios.get(progUrl);
+            setMyPrograms(response.data);
+        } catch (error) {
+            console.error("Error fetching programs:", error);
+        }
+    }
+
+    useEffect(() => {
+        getMyPrograms();
+    }, []);
 
     return (
-        <>
-            {/* <PageLayout
-                headerContent={
-                    <>
-                        <Title level={3} style={{ color: "#000", marginTop: 0 }}>
-                            My Programs
-                        </Title>
-                    </>
-                }
-            // footerContent={<div>Home Page Footer</div>}
-            >
-                <div
-                    style={{
-                        margin: "0 0 10px 0",
-                        border: "1px solid #ccc",
-                        boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
-                    }}
-                >
-                </div> */}
-
-            <div>
-                <Row gutter={16}>
-                    <Col span={8}>
-                        <Card title="Program 1" bordered={false}>
-                            Prog1
+        <div>
+            <Row gutter={[16, 16]}>
+                {myPrograms.map((myProgram) => (
+                    <Col key={myProgram.Id} xs={24} sm={12} md={8} lg={6}>
+                        <Card
+                            cover={<img alt={myProgram.Name} src={myProgram.Image} />}
+                            style={{ height: "100%", overflow: "hidden" }}
+                            bordered={false}
+                            hoverable
+                        >
+                            <Meta
+                                title={<Link to={`./details/${myProgram.Id}`}>{myProgram.Name}</Link>}
+                                description={myProgram.Description}
+                            />
                         </Card>
                     </Col>
-                    <Col span={8}>
-                        <Card title="Program 2" bordered={false}>
-                            Prog2
-                        </Card>
-                    </Col>
-                    <Col span={8}>
-                        <Card title="Program 3" bordered={false}>
-                            Prog3
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-            {/* </PageLayout> */}
-        </>
+                ))}
+            </Row>
+        </div>
     );
 };
 

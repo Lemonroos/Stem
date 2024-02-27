@@ -10,7 +10,7 @@ import StudentSideNav from "./LayoutSider/StudentSideNav";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
-const AdminPageLayout = () => {
+const SystemAdminPageLayout = () => {
   const [user, setUser] = useState<any>(null);
   useEffect(() => {
     const getUser = () => {
@@ -104,6 +104,6 @@ const AdminPageLayout = () => {
 };
 
 
-export default AdminPageLayout;
+export default SystemAdminPageLayout;
 
 

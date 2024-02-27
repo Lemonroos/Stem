@@ -1,52 +1,28 @@
-import {
-    Card,
-    Col,
-    Row
-} from "antd";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Programs } from "../../models/Programs";
+import axios from "axios";
 
 const MyPrograms = () => {
+    const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
+    const progId = Number(useParams().id);
+    const [programDetails, setProgramDetails] = useState<Programs>()
 
+    async function getProgramById(id: number) {
+        await axios.get(`${progUrl}/${id}`)
+            .then(data => setProgramDetails(data.data))
+            .catch(err => console.error(err))
+    }
+    useEffect(() => {
+        getProgramById(progId);
+    }, [progId])
     return (
         <>
-            {/* <PageLayout
-                headerContent={
-                    <>
-                        <Title level={3} style={{ color: "#000", marginTop: 0 }}>
-                            My Programs
-                        </Title>
-                    </>
-                }
-            // footerContent={<div>Home Page Footer</div>}
-            >
-                <div
-                    style={{
-                        margin: "0 0 10px 0",
-                        border: "1px solid #ccc",
-                        boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
-                    }}
-                >
-                </div> */}
-
-            <div>
-                <Row gutter={16}>
-                    <Col span={8}>
-                        <Card title="Program 1" bordered={false}>
-                            Prog1
-                        </Card>
-                    </Col>
-                    <Col span={8}>
-                        <Card title="Program 2" bordered={false}>
-                            Prog2
-                        </Card>
-                    </Col>
-                    <Col span={8}>
-                        <Card title="Program 3" bordered={false}>
-                            Prog3
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-            {/* </PageLayout> */}
+            {programDetails &&
+                <div>
+                    {programDetails.Name}
+                </div>
+            }
         </>
     );
 };

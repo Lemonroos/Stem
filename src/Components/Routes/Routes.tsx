@@ -14,6 +14,7 @@ import MyGroupDetails from "../Pages/Student/MyGroupDetails";
 import GroupList from "../Pages/Manager/GroupList";
 import MyProgramsList from "../Pages/Student/MyProgramsList";
 import MyProgramDetails from "../Pages/Student/MyProgramsDetails"
+import AllPrograms from "../Pages/Student/AllPrograms";
 
 import TeacherLayout from "../layout/TeacherLayout";
 import TeacherDashboard from "../Pages/Teacher/TeacherDashboard";
@@ -21,8 +22,11 @@ import TeacherDashboard from "../Pages/Teacher/TeacherDashboard";
 import ManagerLayout from "../layout/ManagerLayout";
 import ManagerDashBoard from "../Pages/Manager/ManagerDashboard";
 
-import AdminLayout from "../layout/AdminLayout";
-import AdminDashboard from "../Pages/Admin/AdminDashboard";
+import SystemAdminPageLayout from "../layout/AdminLayout";
+import SystemAdminDashboard from "../Pages/SystemAdmin/SystemAdminDashboard";
+
+import SchoolAdminPageLayout from "../layout/SchoolAdminLayout";
+import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 
 export const routes = createBrowserRouter([
   {
@@ -47,14 +51,27 @@ export const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/admin",
-    element: <AdminLayout />,
+    path: "/system-admin",
+    element: <SystemAdminPageLayout />,
     errorElement: <ErrorPage />,
     children: [
       // { index: true, element: <HomePage /> },
       {
         path: "dashboard",
-        element: <AdminDashboard />,
+        element: <SystemAdminDashboard />,
+      },
+      { path: "groups", element: <GroupList /> },
+    ]
+  },
+  {
+    path: "/school-admin",
+    element: <SchoolAdminPageLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      // { index: true, element: <HomePage /> },
+      {
+        path: "dashboard",
+        element: <SchoolAdminDashboard />,
       },
       { path: "groups", element: <GroupList /> },
     ]
@@ -99,23 +116,31 @@ export const routes = createBrowserRouter([
         ]
       },
       {
+        path: "programs",
+        element: <AllPrograms />,
+      },
+      {
         path: "my-programs",
         element: <MyProgramsList />,
         // MYGROUP
-        children: [
-          {
-            path: "details/:id",
-            element: <MyProgramDetails />,
-            // children: [
-            //   {
-            //     path: "labs/:id",
-            //     element: </>,
-            //     // MY LABS
-            //   },
-            // ],
-          }
-        ]
+        // children: [
+        //   {
+        //     path: "details/:id",
+        //     element: <MyProgramDetails />,
+        //     // children: [
+        //     //   {
+        //     //     path: "labs/:id",
+        //     //     element: </>,
+        //     //     // MY LABS
+        //     //   },
+        //     // ],
+        //   }
+        // ]
       },
+      {
+        path: "my-programs/details/:id",
+        element: <MyProgramDetails />,
+      }
     ],
   },
   {
@@ -140,7 +165,7 @@ export const routes = createBrowserRouter([
           {
             path: "details/:id",
             element: <MyGroupDetails />,
-             //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
+            //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
             //  display theo trinh tu team cung nhu hoc column team de biet user team nao
           }
         ]
