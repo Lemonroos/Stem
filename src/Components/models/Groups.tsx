@@ -1,4 +1,4 @@
-export interface GroupList {
+export interface Groups {
     Id: number,
     GroupCode: string,
     GroupName: string,

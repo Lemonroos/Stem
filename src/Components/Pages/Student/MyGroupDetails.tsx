@@ -19,6 +19,7 @@ const MyGroupsDetails = () => {
                 console.error('Error fetching data:', error);
             })
     }
+
     // async function countGroupsInAProgram(programId: string) {
     //     try {
     //         const response = await fetch(`https://stem-backend.vercel.app/group/count/countByProgram?programId=${programId}`, {
@@ -36,6 +37,7 @@ const MyGroupsDetails = () => {
     //         return 0; // Return an appropriate value or handle the error case
     //     }
     // }
+    
     useEffect(() => {
         fetchPrograms()
     }, [])
@@ -50,7 +52,7 @@ const MyGroupsDetails = () => {
                             {/* {countGroupsInAProgram(program?.Id)} */}
                         </Card>
                     )}
-                </Card >
+                </Card>
             </div >
         </>
     );

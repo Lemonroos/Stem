@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { Card, Col, Row } from "antd";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Programs } from "../../models/Programs";
 
@@ -8,20 +8,41 @@ const { Meta } = Card;
 
 const MyProgramList = () => {
     const progUrl = 'https://stem-backend.vercel.app/api/v1/programs';
+    const groupUrl = 'https://stem-backend.vercel.app/api/v1/groups';
+    const studentGroupIds = [1, 2];
+    const [studentProgramIds, setStudentProgramIds] = useState<number[]>([]);
     const [myPrograms, setMyPrograms] = useState<Programs[]>([]);
+    // const [myGroups, setMyGroups] = useState<Groups[]>([]);
 
-    async function getMyPrograms() {
+    async function getProgramIdByGroupId(groupId: number) {
         try {
-            const response = await axios.get(progUrl);
-            setMyPrograms(response.data);
+            const response = await axios.get(`${groupUrl}/${groupId}`);
+            const programId = response.data.ProgramId;
+            setStudentProgramIds(studentProgramIds => [...studentProgramIds, programId]);
+        } catch (error) {
+            console.error("Error fetching programs:", error);
+        }
+    }
+    async function getProgramByProgramId(progId: number) {
+        try {
+            const response = await axios.get(`${progUrl}/${progId}`);
+            const data = response.data;
+            setMyPrograms(prevPrograms => [...prevPrograms, data]);
         } catch (error) {
             console.error("Error fetching programs:", error);
         }
     }
 
     useEffect(() => {
-        getMyPrograms();
+        for (const groupId of studentGroupIds) {
+            getProgramIdByGroupId(groupId);
+        }
     }, []);
+    useEffect(() => {
+        for (const progId of studentProgramIds) {
+            getProgramByProgramId(progId);
+        }
+    }, [studentProgramIds]);
 
     return (
         <div>
