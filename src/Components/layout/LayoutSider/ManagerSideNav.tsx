@@ -10,11 +10,11 @@ import {
 export default function ManagerSideNav() {
   const location = useLocation();
   const selectedKey =
- location.pathname === "/student/my-programs"
+ location.pathname === "/manager/my-programs"
       ? "2"
-      : location.pathname === "/student/programs"
+      : location.pathname === "/manager/programs"
       ? "3"
-      : location.pathname === "/student/my-groups"
+      : location.pathname === "/manager/my-groups"
       ? "4"
       : "1";
 
@@ -38,7 +38,7 @@ export default function ManagerSideNav() {
   }
 
   const items = [
-    getItem(<Link to="/student">Dashboard</Link>, "1", <HomeOutlined />,""),
+    getItem(<Link to="/manager">Dashboard</Link>, "1", <HomeOutlined />,""),
     getItem("PROGRAMS", "1.1", <TeamOutlined />, [
       getItem(<Link to="./my-programs">MY PROGRAMS</Link>, "2","",""),
       getItem(<Link to="./programs">LIST OF AVAILABLE PROGRAMS</Link>, "3","",""),

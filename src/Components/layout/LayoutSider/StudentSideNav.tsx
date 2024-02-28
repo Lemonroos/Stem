@@ -22,7 +22,6 @@ export default function StudentSideNav() {
   const [openKeys, setOpenKeys] = useState(
     JSON.parse(sessionStorage.getItem("openKeys") || "[]")
   );
-
   // Save the state of the submenus to sessionStorage whenever it changes
   useEffect(() => {
     sessionStorage.setItem("openKeys", JSON.stringify(openKeys));
@@ -44,7 +43,6 @@ export default function StudentSideNav() {
       getItem(<Link to="./programs">LIST OF AVAILABLE PROGRAMS</Link>, "3","",""),
     ]),
     getItem(<Link to="./my-groups">MY GROUPs</Link>, "4", <HomeOutlined />,""),
-    
   ];
 
   return (
