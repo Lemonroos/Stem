@@ -72,10 +72,10 @@ const MyPrograms = () => {
                                 </Col>
                                 <Col span={12}>
                                     <Space direction="vertical" size="middle">
-                                        <Row gutter={[16, 16]}>
+                                        {/* <Row gutter={[16, 16]}>
                                             <Text strong>School Year ID:</Text></Row>
                                         <Row gutter={[16, 16]}>
-                                            <Text>{programDetails.SchoolYearId}</Text></Row>
+                                            <Text>{programDetails.SchoolYearId}</Text></Row> */}
 
 
                                         <Row gutter={[16, 16]}>
