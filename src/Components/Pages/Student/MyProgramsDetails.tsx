@@ -1,16 +1,19 @@
-import { Card, Col, Image, Row, Space, Typography } from "antd"; // Import Ant Design components
+import { Card, Col, Collapse, CollapseProps, Image, Row, Space, Typography } from "antd"; // Import Ant Design components
 import axios from "axios";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Programs } from "../../models/Programs";
+import { Labs } from "../../models/Labs";
 
 const { Text } = Typography;
 
 const MyPrograms = () => {
     const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
+    const labsUrl = "https://stem-backend.vercel.app/api/v1/labs";
     const progId = Number(useParams().id);
     const [programDetails, setProgramDetails] = useState<Programs | undefined>();
+    const [labs, setLabs] = useState<Labs[]>([]);
 
     async function getProgramById(id: number) {
         try {
@@ -21,10 +24,34 @@ const MyPrograms = () => {
         }
     }
 
+    async function getLabsInProgramm() {
+        await axios.get(labsUrl)
+            .then(data => {
+                setLabs(data.data)
+            })
+    }
     useEffect(() => {
         getProgramById(progId);
+        getLabsInProgramm()
     }, [progId]);
 
+    const onChange = (key: string | string[]) => {
+        console.log(key);
+    };
+    const items: CollapseProps['items'] = [];
+    labs.forEach((lab) => {
+        items.push({
+            key: lab.Id,
+            label: lab.Code,
+            children:
+                <div>
+                    <strong>Topic</strong>
+                    <p>{lab.Topic}</p>
+                    <strong>Description</strong>
+                    <p>{lab.Description}</p>
+                </div>
+        })
+    })
     return (
         <div style={{ padding: '24px' }}>
             {programDetails && (
@@ -94,6 +121,7 @@ const MyPrograms = () => {
                     </Row>
                 </Card>
             )}
+            <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} />
         </div>
     );
 };
