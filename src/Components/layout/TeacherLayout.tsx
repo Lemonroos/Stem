@@ -14,7 +14,7 @@ const TeacherPageLayout = () => {
   const [user, setUser] = useState<any>(null);
   useEffect(() => {
     const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
+      fetch("https://stem-backend.vercel.app/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
