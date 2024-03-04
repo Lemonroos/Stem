@@ -4,7 +4,7 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 import StudentSideNav from "./LayoutSider/StudentSideNav";
 const { Header, Sider, Content } = Layout;
@@ -37,7 +37,10 @@ const StudentPageLayout = () => {
     getUser();
   }, []);
   console.log(user);
-
+  
+  const logout = () => {
+    window.open('https://stem-backend.vercel.app/auth/logout', '_self')
+  }
 
 
   return (
@@ -52,10 +55,10 @@ const StudentPageLayout = () => {
               icon={<UserOutlined />}
               style={{ marginBottom: 20 }}
 
-              src={user?.photos?.[0]?.value}
+              src={user ? user.Avatar : ''}
             />
             <Title level={4} style={{ marginTop: 0 }}>
-              {user?.displayName}
+              {user ? user.Name : ''}
 
             </Title>
           </Space>
@@ -69,7 +72,6 @@ const StudentPageLayout = () => {
 
 
           <Header style={CHeader}>
-            <Link to="/">
               <Button
                 size={"large"}
                 icon={<UploadOutlined style={{ fontSize: "200%" }} />}
@@ -81,10 +83,10 @@ const StudentPageLayout = () => {
                   rotate: "90deg",
                   padding: 0,
                 }}
+                onClick={logout}
               >
 
               </Button>
-            </Link>
           </Header>
 
 
