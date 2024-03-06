@@ -4,9 +4,8 @@ import {
 import { useEffect, useState } from "react";
 import { Programs } from "../../models/Programs";
 
-
-const ProgramGroups = () => {
-    const progUrl = "https://stem-backend.vercel.app/program";
+const MyGroupsDetails = () => {
+    const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
 
     const [programs, setPrograms] = useState<Programs[]>([]);
 
@@ -20,6 +19,7 @@ const ProgramGroups = () => {
                 console.error('Error fetching data:', error);
             })
     }
+
     // async function countGroupsInAProgram(programId: string) {
     //     try {
     //         const response = await fetch(`https://stem-backend.vercel.app/group/count/countByProgram?programId=${programId}`, {
@@ -37,6 +37,7 @@ const ProgramGroups = () => {
     //         return 0; // Return an appropriate value or handle the error case
     //     }
     // }
+    
     useEffect(() => {
         fetchPrograms()
     }, [])
@@ -51,10 +52,10 @@ const ProgramGroups = () => {
                             {/* {countGroupsInAProgram(program?.Id)} */}
                         </Card>
                     )}
-                </Card >
+                </Card>
             </div >
         </>
     );
 };
 
-export default ProgramGroups;
+export default MyGroupsDetails;
