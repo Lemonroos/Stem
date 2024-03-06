@@ -28,166 +28,174 @@ import SystemAdminDashboard from "../Pages/SystemAdmin/SystemAdminDashboard";
 import SchoolAdminPageLayout from "../layout/SchoolAdminLayout";
 import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 
-export const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <Homepage />,
-      },
-      {
-        path: "news",
-        element: <News />,
-      },
-      { path: "programs", element: <Programs /> },
-      { path: "about-us", element: <AboutUs /> },
-      {
-        path: "login",
-        element: <Login />,
-      },
-    ],
-  },
-  {
-    path: "/system-admin",
-    element: <SystemAdminPageLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      // { index: true, element: <HomePage /> },
-      {
-        path: "dashboard",
-        element: <SystemAdminDashboard />,
-      },
-      { path: "groups", element: <GroupList /> },
-    ]
-  },
-  {
-    path: "/school-admin",
-    element: <SchoolAdminPageLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      // { index: true, element: <HomePage /> },
-      {
-        path: "dashboard",
-        element: <SchoolAdminDashboard />,
-      },
-      { path: "groups", element: <GroupList /> },
-    ]
-  },
-  {
-    path: "/manager",
-    element: <ManagerLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: <ManagerDashBoard /> },
-      // {
-      //   //   path: "dashboard",
-      //   //   element: <Dashboard />,
-      //   // },
-      //   // { path: "groups", element: <GroupList /> },
-    ]
-  },
-  {
-    path: "/student",
-    element: <StudentLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <StudentDashboard />,
-      },
-      {
-        path: "details",
-        // student account details (info)
-      },
-      {
-        path: "my-groups",
-        element: <MyGroupList />,
-        // MYGROUP
-        children: [
-          {
-            path: "details/:id",
-            element: <MyGroupDetails />,
-            //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
-            //  display theo trinh tu team cung nhu hoc column team de biet user team nao
-          }
-        ]
-      },
-      {
-        path: "programs",
-        element: <AllPrograms />,
-      },
-      {
-        path: "my-programs",
-        element: <MyProgramsList />,
-        // MYGROUP
-        // children: [
-        //   {
-        //     path: "details/:id",
-        //     element: <MyProgramDetails />,
-        //     // children: [
-        //     //   {
-        //     //     path: "labs/:id",
-        //     //     element: </>,
-        //     //     // MY LABS
-        //     //   },
-        //     // ],
-        //   }
-        // ]
-      },
-      {
-        path: "my-programs/details/:id",
-        element: <MyProgramDetails />,
-      }
-    ],
-  },
-  {
-    path: "/teacher",
-    element: <TeacherLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <TeacherDashboard />,
-      },
-      {
-        path: "details",
+import PrivateRoute from "../../config/RoleBasedRoutes";
 
-        // teacher account details (info)
-      },
-      {
-        path: "my-groups",
-        element: <MyGroupList />,
-        // MYGROUP
-        children: [
-          {
-            path: "details/:id",
-            element: <MyGroupDetails />,
-            //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
-            //  display theo trinh tu team cung nhu hoc column team de biet user team nao
-          }
-        ]
-      },
-      {
-        path: "my-programs",
-        element: <MyProgramsList />,
-        // MYGROUP
-        children: [
-          {
-            path: "details/:id",
-            element: <MyProgramDetails />,
-            // children: [
-            //   {
-            //     path: "labs/:id",
-            //     element: </>,
-            //     // MY LABS
-            //   },
-            // ],
-          }
-        ]
-      },
-    ],
-  }
-]);
+
+
+
+
+export const routes = createBrowserRouter(
+  [
+
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <Homepage />,
+        },
+        {
+          path: "news",
+          element: <News />,
+        },
+        { path: "programs", element: <Programs /> },
+        { path: "about-us", element: <AboutUs /> },
+        {
+          path: "login",
+          element: <Login />,
+        },
+      ],
+    },
+    {
+      path: "/system-admin",
+      element: <SystemAdminPageLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        // { index: true, element: <HomePage /> },
+        {
+          path: "dashboard",
+          element: <SystemAdminDashboard />,
+        },
+        { path: "groups", element: <GroupList /> },
+      ]
+    },
+    {
+      path: "/school-admin",
+      element: <SchoolAdminPageLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        // { index: true, element: <HomePage /> },
+        {
+          path: "dashboard",
+          element: <SchoolAdminDashboard />,
+        },
+        { path: "groups", element: <GroupList /> },
+      ]
+    },
+    {
+      path: "/manager",
+      element: <ManagerLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        { index: true, element: <ManagerDashBoard /> },
+        // {
+        //   //   path: "dashboard",
+        //   //   element: <Dashboard />,
+        //   // },
+        //   // { path: "groups", element: <GroupList /> },
+      ]
+    },
+    {
+      path: "/student",
+      element: <PrivateRoute requiredRoles={['Student']}><StudentLayout /></PrivateRoute>,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <StudentDashboard />
+        },
+        {
+          path: "details",
+          // student account details (info)
+        },
+        {
+          path: "my-groups",
+          element: <MyGroupList />,
+          // MYGROUP
+          children: [
+            {
+              path: "details/:id",
+              element: <MyGroupDetails />,
+              //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
+              //  display theo trinh tu team cung nhu hoc column team de biet user team nao
+            }
+          ]
+        },
+        {
+          path: "programs",
+          element: <AllPrograms />,
+        },
+        {
+          path: "my-programs",
+          element: <MyProgramsList />,
+          // MYGROUP
+          // children: [
+          //   {
+          //     path: "details/:id",
+          //     element: <MyProgramDetails />,
+          //     // children: [
+          //     //   {
+          //     //     path: "labs/:id",
+          //     //     element: </>,
+          //     //     // MY LABS
+          //     //   },
+          //     // ],
+          //   }
+          // ]
+        },
+        {
+          path: "my-programs/details/:id",
+          element: <MyProgramDetails />,
+        }
+      ],
+    },
+    {
+      path: "/teacher",
+      element: <PrivateRoute requiredRoles={['Teacher']}><TeacherLayout /></PrivateRoute>,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <TeacherDashboard />,
+        },
+        {
+          path: "details",
+
+          // teacher account details (info)
+        },
+        {
+          path: "my-groups",
+          element: <MyGroupList />,
+          // MYGROUP
+          children: [
+            {
+              path: "details/:id",
+              element: <MyGroupDetails />,
+              //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
+              //  display theo trinh tu team cung nhu hoc column team de biet user team nao
+            }
+          ]
+        },
+        {
+          path: "my-programs",
+          element: <MyProgramsList />,
+          // MYGROUP
+          children: [
+            {
+              path: "details/:id",
+              element: <MyProgramDetails />,
+              // children: [
+              //   {
+              //     path: "labs/:id",
+              //     element: </>,
+              //     // MY LABS
+              //   },
+              // ],
+            }
+          ]
+        },
+      ],
+    }
+  ]);
