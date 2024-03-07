@@ -4,7 +4,7 @@ import ErrorPage from "../Pages/Error/ErrorPage";
 import AboutUs from "../Pages/Home/AboutUs";
 import Homepage from "../Pages/Home/Homepage";
 import News from "../Pages/Home/News";
-import Programs from "../Pages/Home/Programs";
+// import Programs from "../Pages/Home/Programs";
 import Login from "../Pages/Login/Login";
 
 import StudentDashboard from "../Pages/Student/StudentDashboard";
@@ -50,7 +50,7 @@ export const routes = createBrowserRouter(
           path: "news",
           element: <News />,
         },
-        { path: "programs", element: <Programs /> },
+        // { path: "programs", element: <Programs /> },
         { path: "about-us", element: <AboutUs /> },
         {
           path: "login",
