@@ -21,11 +21,10 @@ export default function AllPrograms() {
         <div>
             <Row gutter={30}>
                 {programs.map(program => (
-                    <Col span={8}>
+                    <Col span={8} key={program.Id}>
                         <Card
                             title={<Link to={`./details/${program.Id}`}>{program.Name}</Link>}
                             bordered={false}
-                            key={program.Id}
                             cover={<img alt="news" src={program.Image} style={{ height: '30vh' }} />}>
                             {program.Description}
                         </Card>

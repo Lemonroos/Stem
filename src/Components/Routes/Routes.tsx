@@ -60,7 +60,7 @@ export const routes = createBrowserRouter(
     },
     {
       path: "/system-admin",
-      element: <SystemAdminPageLayout />,
+      element: <PrivateRoute requiredRoles={['SystemAdmin']}><SystemAdminPageLayout /></PrivateRoute>,
       errorElement: <ErrorPage />,
       children: [
         // { index: true, element: <HomePage /> },
@@ -73,7 +73,7 @@ export const routes = createBrowserRouter(
     },
     {
       path: "/school-admin",
-      element: <SchoolAdminPageLayout />,
+      element: <PrivateRoute requiredRoles={['SchoolAdmin']}><SchoolAdminPageLayout /></PrivateRoute>,
       errorElement: <ErrorPage />,
       children: [
         // { index: true, element: <HomePage /> },
@@ -86,7 +86,7 @@ export const routes = createBrowserRouter(
     },
     {
       path: "/manager",
-      element: <ManagerLayout />,
+      element: <PrivateRoute requiredRoles={['Manager']}><ManagerLayout /></PrivateRoute>,
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <ManagerDashBoard /> },
