@@ -11,14 +11,17 @@ const { Text } = Typography;
 const MyPrograms = () => {
     const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
     const labsUrl = "https://stem-backend.vercel.app/api/v1/labs";
-    const progId = Number(useParams().id);
-    const [programDetails, setProgramDetails] = useState<Programs | undefined>();
+    const progId = String(useParams().id);
+    const [programDetails, setProgramDetails] = useState<Programs>();
     const [labs, setLabs] = useState<Labs[]>([]);
 
-    async function getProgramById(id: number) {
+    async function getProgramById(programId: string) {
+
         try {
-            const response = await axios.get(`${progUrl}/${id}`);
-            setProgramDetails(response.data);
+            await axios.get(`${progUrl}/${programId}`)
+                .then((response) => {
+                    setProgramDetails(response.data);
+                })
         } catch (error) {
             console.error(error);
         }
@@ -33,7 +36,7 @@ const MyPrograms = () => {
     useEffect(() => {
         getProgramById(progId);
         getLabsInProgramm()
-    }, [progId]);
+    }, []);
 
     const onChange = (key: string | string[]) => {
         console.log(key);

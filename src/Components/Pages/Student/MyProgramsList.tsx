@@ -7,23 +7,21 @@ import { Programs } from "../../models/Programs";
 const { Meta } = Card;
 
 const MyProgramList = () => {
-    const progUrl = 'https://stem-backend.vercel.app/api/v1/programs';
-    const studentProgramIds = [1, 2];
+    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
+    const studentId = 1;
     const [myPrograms, setMyPrograms] = useState<Programs[]>([]);
-    async function getProgramByProgramId(progId: number) {
+    async function getProgramByStudentId(studentId: number) {
         try {
-            await axios.get(`${progUrl}/${progId}`)
-                .then((data) => {
-                    setMyPrograms(prevPrograms => [...prevPrograms, data.data]);
+            await axios.get(`${progamsByStudentUrl}?StudentId=${studentId}`)
+                .then((res) => {
+                    setMyPrograms(res.data);
                 })
         } catch (error) {
             console.error("Error fetching programs:", error);
         }
     }
     useEffect(() => {
-        studentProgramIds.forEach(progId => {
-            getProgramByProgramId(progId); // Wait for the promise to resolve
-        });
+        getProgramByStudentId(studentId); // Wait for the promise to resolve
     }, []);
 
     return (
