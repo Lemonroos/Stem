@@ -1,57 +1,129 @@
-import {
-    Card,
-} from "antd";
-import { useEffect, useState } from "react";
-import { Programs } from "../../models/Programs";
+import { useEffect, useState } from 'react';
+import { Button, Table } from 'antd';
+import type { GetProp, TableProps } from 'antd';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const MyGroups = () => {
-    const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
 
-    const [programs, setPrograms] = useState<Programs[]>([]);
 
-    function fetchPrograms() {
-        fetch(progUrl)
-            .then((res) => res.json()) // Parse the response as JSON
-            .then((data) => {
-                setPrograms(data); // Log the data to the console
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            })
+type ColumnsType<T> = TableProps<T>['columns'];
+type TablePaginationConfig = Exclude<GetProp<TableProps, 'pagination'>, boolean>;
+
+
+interface TableParams {
+    pagination?: TablePaginationConfig;
+    sortField?: string;
+    sortOrder?: string;
+    filters?: Parameters<GetProp<TableProps, 'onChange'>>[1];
+}
+
+interface ProgramAndGroup {
+    Id: Number,
+    StudentId: Number,
+    ClassCode: String,
+    FullName: String,
+    ProgramId: Number,
+    ProgramCode: String,
+    ProgramName: String,
+    CreatedDate: Date,
+    UpdatedDate: Date,
+    Description: String,
+    Image: String,
+    GroupId: Number,
+    GroupCode: String,
+    GroupName: String
+}
+
+const columns: ColumnsType<ProgramAndGroup> = [
+    {
+        title: 'Program code',
+        dataIndex: 'ProgramCode',
+        sorter: true,
+        render: (ProgramCode) => `${ProgramCode}`,
+    },
+    {
+        title: 'Program Name',
+        dataIndex: 'ProgramName',
+        sorter: true,
+        render: (ProgramName) => `${ProgramName}`,
+    },
+    {
+        title: 'Group Code',
+        dataIndex: 'GroupCode',
+        sorter: true,
+        render: (GroupCode) => `${GroupCode}`,
+    },
+    {
+        title: 'View',
+        dataIndex: 'GroupId',
+        sorter: true,
+        render: (GroupId) =>
+            <Button>
+                <Link to={`./details/${GroupId}`}>
+                    More
+                </Link>
+            </Button>,
+    },
+];
+
+const MyGroups: React.FC = () => {
+    const studentId = 1;
+    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
+    const [data, setData] = useState<ProgramAndGroup[]>();
+    const [loading, setLoading] = useState(false);
+    const [tableParams, setTableParams] = useState<TableParams>({
+        pagination: {
+            current: 1,
+            pageSize: 10,
+        },
+    });
+    async function getProgramByStudentId(studentId: number) {
+        try {
+            setLoading(true);
+            await axios.get(`${progamsByStudentUrl}?StudentId=${studentId}`)
+                .then((res) => {
+                    setData(res.data);
+                    setLoading(false);
+                    setTableParams({
+                        ...tableParams,
+                        pagination: {
+                            ...tableParams.pagination,
+                            total: 40,
+                        },
+                    });
+                })
+        } catch (error) {
+            console.error("Error fetching programs:", error);
+        }
     }
-    // async function countGroupsInAProgram(programId: string) {
-    //     try {
-    //         const response = await fetch(`https://stem-backend.vercel.app/group/count/countByProgram?programId=${programId}`, {
-    //             cache: 'no-store', // Ensure no caching
-    //         });
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         const data = await response.json();
-    //         console.log(data);
-    //         return data.groupCount;
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //         // Handle the error (e.g., show a message to the user)
-    //         return 0; // Return an appropriate value or handle the error case
-    //     }
-    // }
+
     useEffect(() => {
-        fetchPrograms()
-    }, [])
+        getProgramByStudentId(studentId);
+    }, [JSON.stringify(tableParams)]);
+
+    const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter) => {
+        setTableParams({
+            pagination,
+            filters,
+            ...sorter,
+        });
+
+        // `dataSource` is useless since `pageSize` changed
+        if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+            setData([]);
+        }
+    };
+
     return (
         <>
-            <div
-            >
-                <Card title="Current Programs" loading={programs.length == 0}>
-                    {programs.map((program) =>
-                        <Card key={program?.Id} type="inner" title={program?.Name} extra={<a href="#" > More</a>}>
-                            Groups:
-                            {/* {countGroupsInAProgram(program?.Id)} */}
-                        </Card>
-                    )}
-                </Card >
-            </div >
+            <h1>My groups</h1>
+            <Table
+                columns={columns}
+                dataSource={data}
+                pagination={tableParams.pagination}
+                loading={loading}
+                onChange={handleTableChange}
+            />
         </>
     );
 };
