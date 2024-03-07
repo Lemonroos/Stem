@@ -4,6 +4,9 @@ import { Navigate } from 'react-router-dom';
 import Forbidden from '../Components/Pages/Error/ErrorPage';
 import getUser from '../config/auth';
 
+import Spin from '../Components/UI/spin'
+
+
 interface User {
     Avatar: string;
     Name: string;
@@ -37,7 +40,11 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRoles }) 
     }, [isAuth]);
 
     if (isLoading) {
-        return <div>Loading...</div>; // Or your loading spinner
+
+        return <><Spin /></>; // Or your loading spinner
+
+      
+
     }
     // if (inverted) {
     //     return isAuth ? <Navigate to="/login" /> : <>{children}</>;
