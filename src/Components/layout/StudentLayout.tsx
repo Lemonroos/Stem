@@ -13,6 +13,8 @@ const { Title } = Typography;
 import Spin from '../UI/spin'
 
 
+
+
 const StudentPageLayout = () => {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +35,9 @@ const StudentPageLayout = () => {
   // let user = JSON.parse(localStorage.getItem('user') || '');
   // console.log(user)
   if (isLoading) {
+
     return <><Spin /></>;
+
   }
   return (
     <>
