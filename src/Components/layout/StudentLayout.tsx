@@ -10,7 +10,7 @@ import StudentSideNav from "./LayoutSider/StudentSideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
-
+import Spin from '../UI/spin'
 
 
 const StudentPageLayout = () => {
@@ -33,7 +33,7 @@ const StudentPageLayout = () => {
   // let user = JSON.parse(localStorage.getItem('user') || '');
   // console.log(user)
   if (isLoading) {
-    return <div>Loading...</div>; // Or your loading spinner
+    return <><Spin /></>;
   }
   return (
     <>
