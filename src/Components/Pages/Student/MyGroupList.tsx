@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Table } from 'antd';
 import type { GetProp, TableProps } from 'antd';
 import axios from 'axios';
@@ -17,7 +17,7 @@ interface TableParams {
     filters?: Parameters<GetProp<TableProps, 'onChange'>>[1];
 }
 
-interface BlahBlah {
+interface ProgramAndGroup {
     Id: Number,
     StudentId: Number,
     ClassCode: String,
@@ -34,7 +34,7 @@ interface BlahBlah {
     GroupName: String
 }
 
-const columns: ColumnsType<BlahBlah> = [
+const columns: ColumnsType<ProgramAndGroup> = [
     {
         title: 'Program code',
         dataIndex: 'ProgramCode',
@@ -57,18 +57,19 @@ const columns: ColumnsType<BlahBlah> = [
         title: 'View',
         dataIndex: 'GroupId',
         sorter: true,
-        render: (GroupId) => 
-        <Button>
-            <Link to={`./details/${GroupId}`}>
-                More
-            </Link>
-        </Button>,
+        render: (GroupId) =>
+            <Button>
+                <Link to={`./details/${GroupId}`}>
+                    More
+                </Link>
+            </Button>,
     },
 ];
 
 const MyGroups: React.FC = () => {
     const studentId = 1;
-    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student'; const [data, setData] = useState<Programs[]>();
+    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
+    const [data, setData] = useState<ProgramAndGroup[]>();
     const [loading, setLoading] = useState(false);
     const [tableParams, setTableParams] = useState<TableParams>({
         pagination: {
