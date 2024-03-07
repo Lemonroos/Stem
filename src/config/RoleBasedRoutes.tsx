@@ -4,7 +4,9 @@ import { Navigate } from 'react-router-dom';
 import Forbidden from '../Components/Pages/Error/ErrorPage';
 import getUser from '../config/auth';
 
+
 import Spin from '../Components/UI/spin'
+
 
 
 interface User {
@@ -40,6 +42,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRoles }) 
     }, [isAuth]);
 
     if (isLoading) {
+
 
         return <><Spin /></>; // Or your loading spinner
 
