@@ -4,7 +4,7 @@ import ErrorPage from "../Pages/Error/ErrorPage";
 import AboutUs from "../Pages/Home/AboutUs";
 import Homepage from "../Pages/Home/Homepage";
 import News from "../Pages/Home/News";
-import Programs from "../Pages/Home/Programs";
+// import Programs from "../Pages/Home/Programs";
 import Login from "../Pages/Login/Login";
 
 import StudentDashboard from "../Pages/Student/StudentDashboard";
@@ -50,7 +50,7 @@ export const routes = createBrowserRouter(
           path: "news",
           element: <News />,
         },
-        { path: "programs", element: <Programs /> },
+        // { path: "programs", element: <Programs /> },
         { path: "about-us", element: <AboutUs /> },
         {
           path: "login",
@@ -60,7 +60,7 @@ export const routes = createBrowserRouter(
     },
     {
       path: "/system-admin",
-      element: <SystemAdminPageLayout />,
+      element: <PrivateRoute requiredRoles={['SystemAdmin']}><SystemAdminPageLayout /></PrivateRoute>,
       errorElement: <ErrorPage />,
       children: [
         // { index: true, element: <HomePage /> },
@@ -73,7 +73,7 @@ export const routes = createBrowserRouter(
     },
     {
       path: "/school-admin",
-      element: <SchoolAdminPageLayout />,
+      element: <PrivateRoute requiredRoles={['SchoolAdmin']}><SchoolAdminPageLayout /></PrivateRoute>,
       errorElement: <ErrorPage />,
       children: [
         // { index: true, element: <HomePage /> },
@@ -86,7 +86,7 @@ export const routes = createBrowserRouter(
     },
     {
       path: "/manager",
-      element: <ManagerLayout />,
+      element: <PrivateRoute requiredRoles={['Manager']}><ManagerLayout /></PrivateRoute>,
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <ManagerDashBoard /> },
