@@ -3,6 +3,7 @@ import {
   EyeTwoTone,
   LockOutlined,
   UserOutlined,
+  ArrowLeftOutlined
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -49,7 +50,7 @@ const Login = () => {
         <source src="/Shared/HRBg.mp4" type="video/mp4" />
       </video>
 
-      
+
       <div
         style={{
           position: "fixed",
@@ -72,12 +73,21 @@ const Login = () => {
           backdropFilter: "blur(4px)",
         }}
       >
-        <div style={{ textAlign: "center" }}>
-          <Avatar size={64} icon={<UserOutlined />} />
+        <div>
+          {/* <Avatar size={64} icon={<UserOutlined />} /> */}
+          <Link to="/">
+            <Button
+              type="text"
+              htmlType="submit"
+              style={{ border: "none", color: "#ffffff", fontSize: "20px" }}
+            >
+              <ArrowLeftOutlined />
+            </Button>
+          </Link>
         </div>
-        <Title level={1} style={{ textAlign: "center", color: "#fff" }}>
-          Welcome to STEM
-        </Title>
+          <Title level={1} style={{ textAlign: "center", color: "#fff" }}>
+            Welcome to STEM
+          </Title>
         <Form>
           <Row>
             <Col span={24}>
