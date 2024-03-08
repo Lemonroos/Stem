@@ -3,6 +3,7 @@ import { Button, Table } from 'antd';
 import type { GetProp, TableProps } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import getUser from '../../../config/auth';
 
 
 
@@ -67,20 +68,31 @@ const columns: ColumnsType<ProgramAndGroup> = [
 ];
 
 const MyGroups: React.FC = () => {
-    const studentId = 1;
+    const [userId, setUserId] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const fetchUser = async () => {
+            const resObject = await getUser();
+            setUserId(resObject.userId);
+            setIsLoading(false);
+        };
+        fetchUser();
+        // setUser(JSON.parse(localStorage.getItem('user')));
+    }, []);
+    // const studentId = userId;
+    console.log(userId);
     const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
     const [data, setData] = useState<ProgramAndGroup[]>();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [tableParams, setTableParams] = useState<TableParams>({
         pagination: {
             current: 1,
             pageSize: 10,
         },
     });
-    async function getProgramByStudentId(studentId: number) {
+    async function getProgramByStudentId() {
         try {
-            setLoading(true);
-            await axios.get(`${progamsByStudentUrl}?StudentId=${studentId}`)
+            await axios.get(`${progamsByStudentUrl}?StudentId=${userId}`)
                 .then((res) => {
                     setData(res.data);
                     setLoading(false);
@@ -98,8 +110,8 @@ const MyGroups: React.FC = () => {
     }
 
     useEffect(() => {
-        getProgramByStudentId(studentId);
-    }, [JSON.stringify(tableParams)]);
+        getProgramByStudentId();
+    }, [!isLoading && JSON.stringify(tableParams)]);
 
     const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter) => {
         setTableParams({
