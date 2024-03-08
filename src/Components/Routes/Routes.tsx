@@ -52,12 +52,13 @@ export const routes = createBrowserRouter(
         },
         // { path: "programs", element: <Programs /> },
         { path: "about-us", element: <AboutUs /> },
-        {
-          path: "login",
-          element: <Login />,
-        },
       ],
     },
+    {
+      path: "login",
+      element: <Login />,
+    },
+
     {
       path: "/system-admin",
       element: <PrivateRoute requiredRoles={['SystemAdmin']}><SystemAdminPageLayout /></PrivateRoute>,
