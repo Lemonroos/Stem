@@ -15,6 +15,7 @@ import GroupList from "../Pages/Manager/GroupList";
 import MyProgramsList from "../Pages/Student/MyProgramsList";
 import MyProgramDetails from "../Pages/Student/MyProgramsDetails"
 import AllPrograms from "../Pages/Student/AllPrograms";
+import ProgramDetails from "../Pages/Student/ProgramDetails";
 
 import TeacherLayout from "../layout/TeacherLayout";
 import TeacherDashboard from "../Pages/Teacher/TeacherDashboard";
@@ -29,6 +30,8 @@ import SchoolAdminPageLayout from "../layout/SchoolAdminLayout";
 import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 
 import PrivateRoute from "../../config/RoleBasedRoutes";
+import LabDetails from "../Pages/Student/LabDetails";
+
 
 
 
@@ -134,6 +137,10 @@ export const routes = createBrowserRouter(
           element: <AllPrograms />,
         },
         {
+          path: "programs/details/:id",
+          element: <ProgramDetails />,
+        },
+        {
           path: "my-programs",
           element: <MyProgramsList />,
           // MYGROUP
@@ -154,6 +161,10 @@ export const routes = createBrowserRouter(
         {
           path: "my-programs/details/:id",
           element: <MyProgramDetails />,
+        },
+        {
+          path: "my-programs/details/:programId/labs/:labId",
+          element: <LabDetails />,
         }
       ],
     },
