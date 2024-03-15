@@ -28,6 +28,13 @@ const StudentPageLayout = () => {
     // setUser(JSON.parse(localStorage.getItem('user')));
   }, []);
 
+  // useEffect(() => {
+  //   if(!user){
+  //     setUser(JSON.parse(sessionStorage.getItem('user') || ''));
+  //     setIsLoading(!isLoading)
+  //   }
+  // }, [isLoading && !user]);
+
   const logout = () => {
     window.open('https://stem-backend.vercel.app/auth/logout', '_self');
     localStorage.setItem('success', 'false');

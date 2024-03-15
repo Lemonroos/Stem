@@ -52,12 +52,13 @@ export const routes = createBrowserRouter(
         },
         // { path: "programs", element: <Programs /> },
         { path: "about-us", element: <AboutUs /> },
-        {
-          path: "login",
-          element: <Login />,
-        },
       ],
     },
+    {
+      path: "login",
+      element: <Login />,
+    },
+
     {
       path: "/system-admin",
       element: <PrivateRoute requiredRoles={['SystemAdmin']}><SystemAdminPageLayout /></PrivateRoute>,
@@ -114,14 +115,19 @@ export const routes = createBrowserRouter(
           path: "my-groups",
           element: <MyGroupList />,
           // MYGROUP
-          children: [
-            {
-              path: "details/:id",
-              element: <MyGroupDetails />,
-              //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
-              //  display theo trinh tu team cung nhu hoc column team de biet user team nao
-            }
-          ]
+          // children: [
+          //   {
+          //     path: "details/:id",
+          //     element: <MyGroupDetails />,
+          //     //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
+          //     //  display theo trinh tu team cung nhu hoc column team de biet user team nao
+          //   }
+          // ]
+        },
+        {
+          path: "my-groups/details/:id",
+          element: <MyGroupDetails />,
+          // student account details (info)
         },
         {
           path: "programs",
@@ -169,14 +175,14 @@ export const routes = createBrowserRouter(
           path: "my-groups",
           element: <MyGroupList />,
           // MYGROUP
-          children: [
-            {
-              path: "details/:id",
-              element: <MyGroupDetails />,
-              //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
-              //  display theo trinh tu team cung nhu hoc column team de biet user team nao
-            }
-          ]
+          // children: [
+          //   {
+          //     path: "details/:id",
+          //     element: <MyGroupDetails />,
+          //     //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
+          //     //  display theo trinh tu team cung nhu hoc column team de biet user team nao
+          //   }
+          // ]
         },
         {
           path: "my-programs",

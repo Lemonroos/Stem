@@ -14,11 +14,15 @@ export default function getUser() {
       throw new Error("authentication has been failed!");
     }).then((data) => {
       // Return the success status and the user data
-      return { isAuthenticated: data.success, user: data.user };
+      return {
+        isAuthenticated: data.success,
+        user: data.user,
+        userId: data.userId
+      };
     })
     .catch((err) => {
       console.log(err);
-      return { isAuthenticated: false, user: null };
+      return { isAuthenticated: false, user: null, userId: null };
     });
 };
 

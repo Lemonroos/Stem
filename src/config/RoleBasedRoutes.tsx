@@ -24,6 +24,7 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRoles }) => {
     const [user, setUser] = useState<User | any>(null);
+    const [userId, setUserId] = useState<any>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -32,9 +33,12 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRoles }) 
             // setIsAuth(resObject.isAuthenticated);
             // console.log(resObject);
             setUser(resObject.user);
+            setUserId(resObject.userId);
             setIsLoading(false);
             // if (resObject.user) {
             localStorage.setItem('success', JSON.stringify(resObject.isAuthenticated));
+            sessionStorage.setItem('user', JSON.stringify(user))
+            sessionStorage.setItem('userId', userId)
             setIsAuth(localStorage.getItem('success') === 'true');
             // }
         };
