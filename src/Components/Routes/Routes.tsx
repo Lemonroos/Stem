@@ -77,7 +77,7 @@ export const routes = createBrowserRouter([
   {
     path: "/school-admin",
     element: (
-      <PrivateRoute requiredRoles={["SchoolAdmin"]}>
+      <PrivateRoute requiredRoles={["School Admin"]}>
         <SchoolAdminPageLayout />
       </PrivateRoute>
     ),

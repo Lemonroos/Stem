@@ -1,15 +1,19 @@
-import { Column } from '@ant-design/charts';
-import { Card, Col, Progress, Row, Statistic, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { News } from "../../models/News";
+import { Card, Col, Row, Statistic, Progress, Typography } from "antd";
+import { Column } from '@ant-design/charts';
 import getUser from "../../../config/auth";
 import MySpin from "../../UI/spin";
-import { News } from "../../models/News";
-import { fetchAllPrograms, fetchNews, fetchProgramsByStudent, fetchSchoolYears } from './StudentFetching';
-const { Title } = Typography;
 
+const { Title } = Typography;
+const newsUrl = 'https://stem-backend.vercel.app/api/v1/news';
+const schoolYearUrl = 'https://stem-backend.vercel.app/api/v1/school-year';
+const programsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
+const allProgramsUrl = 'https://stem-backend.vercel.app/api/v1/programs';
 
 const StudentDashboard: React.FC = () => {
-  // const [userId, setUserId] = useState<any>(null);
+  const [userId, setUserId] = useState<any>(null);
   const [news, setNews] = useState<News[]>([]);
   const [schoolYears, setSchoolYears] = useState<any[]>([]);
   const [programs, setPrograms] = useState<any[]>([]);
@@ -17,29 +21,60 @@ const StudentDashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchUser() {
+      const resObject = await getUser();
+      setUserId(resObject.userId);
+      setIsLoading(false);
+    };
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    async function fetchSchoolYears() {
       try {
-        const user = await getUser();
-        // setUserId(user.userId);
-
-        const [newsData, schoolYearsData, programsData, allProgramsData] = await Promise.all([
-          fetchNews(),
-          fetchSchoolYears(),
-          fetchProgramsByStudent(user.userId),
-          fetchAllPrograms(),
-        ]);
-
-        setNews(newsData);
-        setSchoolYears(schoolYearsData);
-        setPrograms(programsData);
-        setAllPrograms(allProgramsData);
-        setIsLoading(false);
+        const response = await axios.get(schoolYearUrl);
+        setSchoolYears(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching school years:", error);
       }
     };
+    fetchSchoolYears();
+  }, []);
 
-    fetchData();
+  useEffect(() => {
+    async function fetchPrograms() {
+      try {
+        const response = await axios.get(`${programsByStudentUrl}?StudentId=${userId}`);
+        setPrograms(response.data);
+      } catch (error) {
+        console.error("Error fetching programs:", error);
+      }
+    };
+    fetchPrograms();
+  }, [userId]);
+
+  useEffect(() => {
+    async function fetchAllPrograms() {
+      try {
+        const response = await axios.get(allProgramsUrl);
+        setAllPrograms(response.data);
+      } catch (error) {
+        console.error("Error fetching all programs:", error);
+      }
+    };
+    fetchAllPrograms();
+  }, []);
+
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const response = await axios.get(newsUrl);
+        setNews(response.data);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };
+    fetchNews();
   }, []);
 
   // Prepare data for the column chart
