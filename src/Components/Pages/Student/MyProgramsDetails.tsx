@@ -1,8 +1,8 @@
-import { Button, Card, Col, Collapse, CollapseProps, Image, Row, Space, Typography } from "antd"; // Import Ant Design components
+import { Card, Col, Collapse, CollapseProps, Image, Row, Space, Typography } from "antd"; // Import Ant Design components
 import axios from "axios";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Programs } from "../../models/Programs";
 import { Labs } from "../../models/Labs";
 
@@ -10,7 +10,7 @@ const { Text } = Typography;
 
 const MyPrograms = () => {
     const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
-    const labsInProgramUrl = "https://stem-backend.vercel.app/api/v1/labs/lab-list/labs-in-program?ProgramId=";
+    const labsUrl = "https://stem-backend.vercel.app/api/v1/labs";
     const progId = String(useParams().id);
     const [programDetails, setProgramDetails] = useState<Programs>();
     const [labs, setLabs] = useState<Labs[]>([]);
@@ -28,10 +28,9 @@ const MyPrograms = () => {
     }
 
     async function getLabsInProgramm() {
-        await axios.get(`${labsInProgramUrl}${progId}`)
+        await axios.get(labsUrl)
             .then(data => {
                 setLabs(data.data)
-                console.log(data.data)
             })
     }
     useEffect(() => {
@@ -53,12 +52,6 @@ const MyPrograms = () => {
                     <p>{lab.Topic}</p>
                     <strong>Description</strong>
                     <p>{lab.Description}</p>
-                    <br />
-                    <Link to={`./labs/${lab.Id}`}>
-                        <Button type="primary" block>
-                            Details
-                        </Button>
-                    </Link>
                 </div>
         })
     })
