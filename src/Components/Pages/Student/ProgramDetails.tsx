@@ -1,20 +1,17 @@
-import { Button, Card, Col, Collapse, CollapseProps, Image, Row, Space, Typography } from "antd"; // Import Ant Design components
+import { Card, Col, Image, Row, Space, Typography } from "antd"; // Import Ant Design components
 import axios from "axios";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Programs } from "../../models/Programs";
-import { Labs } from "../../models/Labs";
 
 const { Text } = Typography;
 
-const MyPrograms = () => {
-    const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
-    const labsInProgramUrl = "https://stem-backend.vercel.app/api/v1/labs/lab-list/labs-in-program?ProgramId=";
+const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
+
+const ProgramDetails: React.FC = () => {
     const progId = String(useParams().id);
     const [programDetails, setProgramDetails] = useState<Programs>();
-    const [labs, setLabs] = useState<Labs[]>([]);
-
     async function getProgramById(programId: string) {
 
         try {
@@ -27,41 +24,11 @@ const MyPrograms = () => {
         }
     }
 
-    async function getLabsInProgramm() {
-        await axios.get(`${labsInProgramUrl}${progId}`)
-            .then(data => {
-                setLabs(data.data)
-                console.log(data.data)
-            })
-    }
+
     useEffect(() => {
         getProgramById(progId);
-        getLabsInProgramm()
     }, []);
 
-    const onChange = (key: string | string[]) => {
-        console.log(key);
-    };
-    const items: CollapseProps['items'] = [];
-    labs.forEach((lab) => {
-        items.push({
-            key: lab.Id,
-            label: lab.Code,
-            children:
-                <div>
-                    <strong>Topic</strong>
-                    <p>{lab.Topic}</p>
-                    <strong>Description</strong>
-                    <p>{lab.Description}</p>
-                    <br />
-                    <Link to={`./labs/${lab.Id}`}>
-                        <Button type="primary" block>
-                            Details
-                        </Button>
-                    </Link>
-                </div>
-        })
-    })
     return (
         <div style={{ padding: '24px' }}>
             {programDetails && (
@@ -131,9 +98,8 @@ const MyPrograms = () => {
                     </Row>
                 </Card>
             )}
-            <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} />
         </div>
     );
 };
 
-export default MyPrograms;
+export default ProgramDetails;
