@@ -4,38 +4,39 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { Link, Outlet } from 'react-router-dom';
-import StudentSideNav from "./LayoutSider/StudentSideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
+import { useEffect, useState } from "react";
+import SystemAdminSideNav from "./LayoutSider/SystemAdminSideNav";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
 const SystemAdminPageLayout = () => {
-  // const [user, setUser] = useState<any>(null);
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     fetch("https://stem-backend.vercel.app/auth/login/success", {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Credentials": "true",
-  //       },
-  //     })
-  //       .then((response) => {
-  //         if (response.status === 200) return response.json();
-  //         throw new Error("authentication has been failed!");
-  //       })
-  //       .then((resObject) => {
-  //         setUser(resObject.user);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-  //   getUser();
-  // }, []);
-  // console.log(user);
+  const [user, setUser] = useState<any>(null);
+  useEffect(() => {
+    const getUser = () => {
+      fetch("https://stem-backend.vercel.app/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error("authentication has been failed!");
+        })
+        .then((resObject) => {
+          setUser(resObject.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUser();
+  }, []);
+  console.log(user);
 
 
 
@@ -61,7 +62,7 @@ const SystemAdminPageLayout = () => {
         </Header>
 
         <Sider style={CSider} width={300}>
-          <StudentSideNav />
+          <SystemAdminSideNav />
         </Sider>
 
         <Layout style={{ marginLeft: 300 }}>
