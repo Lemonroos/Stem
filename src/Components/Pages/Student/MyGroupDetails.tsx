@@ -64,7 +64,7 @@ const MyGroupsDetails: React.FC = () => {
 
   return (
     <div>
-      <Card title="My Group Detail" style={{ width: 600 }}>
+      <Card title="My Group Detail" style={{ width: 600, marginBottom:'2%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div>
             <Title level={4}>Group Code: <Text type="secondary">{groupDetail.GroupCode}</Text></Title>
