@@ -10,7 +10,7 @@ export interface Programs {
     StartDate: Date,
     EndDate: Date
 }
-export interface ProgramAndGroup {
+export interface ProgramsOfAMember {
     Id: number,
     StudentId: number,
     ClassCode: string,
@@ -22,7 +22,4 @@ export interface ProgramAndGroup {
     UpdatedDate: Date,
     Description: string,
     Image: string,
-    GroupId: number,
-    GroupCode: string,
-    GroupName: string
 }
