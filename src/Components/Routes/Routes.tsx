@@ -32,6 +32,7 @@ import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 
 import PrivateRoute from "../../config/RoleBasedRoutes";
 import AdminProgram from "../Pages/SystemAdmin/AdminProgram";
+import AdminProgramDetails from "../Pages/SystemAdmin/AdminProgramDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -71,7 +72,8 @@ export const routes = createBrowserRouter([
         element: <SystemAdminDashboard />,
       },
       { path: "groups", element: <GroupList /> },
-      { path: "programs", element: <AdminProgram /> }
+      { path: "programs", element: <AdminProgram /> },
+      { path: "programs/details/:id", element: <AdminProgramDetails/>}
     ],
   },
   {
