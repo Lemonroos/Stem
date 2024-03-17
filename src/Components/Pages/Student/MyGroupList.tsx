@@ -81,7 +81,7 @@ const MyGroups: React.FC = () => {
     }, []);
     // const studentId = userId;
     console.log(userId);
-    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
+    const groupsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/groups-of-a-student';
     const [data, setData] = useState<ProgramAndGroup[]>();
     const [loading, setLoading] = useState(true);
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -92,7 +92,7 @@ const MyGroups: React.FC = () => {
     });
     async function getProgramByStudentId() {
         try {
-            await axios.get(`${progamsByStudentUrl}?StudentId=${userId}`)
+            await axios.get(`${groupsByStudentUrl}?StudentId=${userId}`)
                 .then((res) => {
                     setData(res.data);
                     setLoading(false);

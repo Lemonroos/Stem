@@ -125,7 +125,7 @@ const LabDetails: React.FC = () => {
     };
     return (
         <div>
-            <h1>Lab #{lab?.Id}: {lab?.Topic}</h1>
+            <h1>{lab?.Code}: {lab?.Topic}</h1>
             <Card hoverable style={{ width: '100%', borderRadius: '20px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }}>
                 <Row>
                     <Col span={12} style={{ textAlign: 'center' }}>

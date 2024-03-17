@@ -1,22 +1,21 @@
 
-import { useState, useEffect } from "react";
-import { Menu } from "antd";
-import { Link, useLocation } from "react-router-dom";
 import {
   HomeOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
+import { Menu } from "antd";
+import { useEffect, useState } from "react";
+import { GrTasks } from "react-icons/gr";
+import { Link, useLocation } from "react-router-dom";
 
 export default function ManagerSideNav() {
   const location = useLocation();
   const selectedKey =
- location.pathname === "/manager/my-programs"
+    location.pathname === "/manager/programs"
       ? "2"
-      : location.pathname === "/manager/programs"
-      ? "3"
-      : location.pathname === "/manager/my-groups"
-      ? "4"
-      : "1";
+      : location.pathname === "/manager/submissions"
+        ? "3"
+        : "1";
 
   // Get the initial state of the submenus from sessionStorage
   const [openKeys, setOpenKeys] = useState(
@@ -28,7 +27,7 @@ export default function ManagerSideNav() {
     sessionStorage.setItem("openKeys", JSON.stringify(openKeys));
   }, [openKeys]);
 
-  function getItem(label:any, key:any, icon:any, children:any) {
+  function getItem(label: any, key: any, icon: any, children: any) {
     return {
       key,
       icon,
@@ -38,13 +37,12 @@ export default function ManagerSideNav() {
   }
 
   const items = [
-    getItem(<Link to="/manager">Dashboard</Link>, "1", <HomeOutlined />,""),
+    getItem(<Link to="/manager">Dashboard</Link>, "1", <HomeOutlined />, ""),
     getItem("PROGRAMS", "1.1", <TeamOutlined />, [
-      getItem(<Link to="./my-programs">MY PROGRAMS</Link>, "2","",""),
-      getItem(<Link to="./programs">LIST OF AVAILABLE PROGRAMS</Link>, "3","",""),
+      getItem(<Link to="./programs">Programs</Link>, "2", "", ""),
     ]),
-    getItem(<Link to="./my-groups">MY GROUPs</Link>, "4", <HomeOutlined />,""),
-    
+    getItem(<Link to="./submissions">Student Submissions</Link>, "3", <GrTasks />, ""),
+
   ];
 
   return (
