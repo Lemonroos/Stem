@@ -37,18 +37,22 @@ function CreateProgram({ open, setOpen }: CreateProgramProps) {
     };
 
     const url =
-      "https://stem-backend.vercel.app/api/v1/programs?SchoolYearId=1";
+      "https://stem-backend.vercel.app/api/v1/programs?SchoolYearId=2";
     try {
       await axios.post(url, programData);
       setName("");
       setDescription("");
       setImage("");
-      alert("Program added successfully");
-      setConfirmLoading(false);
-      setOpen(false);
+      // alert("Program added successfully");
+      setConfirmLoading(true);
+      setTimeout(() => {
+        setOpen(false);
+        setConfirmLoading(false);
+      }, 1000)
     } catch (error) {
       console.error("Error adding program:", error);
       setConfirmLoading(false);
+
     }
   };
 
