@@ -31,6 +31,7 @@ const MyProgramList = () => {
                     setMyPrograms(res.data);
                     setIsLoading(false);
                 })
+
         } catch (error) {
             console.error("Error fetching programs:", error);
         }
@@ -48,17 +49,18 @@ const MyProgramList = () => {
                 <Row gutter={[16, 16]}>
                     {myPrograms.map((myProgram) => (
                         <Col key={myProgram.Id} xs={24} sm={12} md={8} lg={6}>
-                            <Card
-                                cover={<img alt={myProgram.ProgramName} src={myProgram.Image} />}
-                                style={{ height: "100%", overflow: "hidden" }}
-                                bordered={false}
-                                hoverable
-                            >
-                                <Meta
-                                    title={<Link to={`./details/${myProgram.Id}`}>{myProgram.ProgramName}</Link>}
-                                    description={myProgram.Description}
-                                />
-                            </Card>
+                            <Link to={`./details/${myProgram.Id}`}>
+                                <Card
+                                    cover={<img alt={myProgram.ProgramName} src={myProgram.Image} />}
+                                    style={{ height: "100%", overflow: "hidden" }}
+                                    bordered={false}
+                                    hoverable
+                                >
+                                    <Meta
+                                        title={myProgram.ProgramName}
+                                        description={myProgram.Description}
+                                    />
+                                </Card></Link>
                         </Col>
                     ))}
                 </Row>
