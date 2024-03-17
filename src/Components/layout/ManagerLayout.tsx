@@ -3,15 +3,42 @@ import {
     UserOutlined
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
-import { Link, Outlet } from 'react-router-dom';
-import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from 'react-router-dom';
+import getUser from "../../config/auth";
+import Spin from '../UI/spin';
 import ManagerSideNav from "./LayoutSider/ManagerSideNav";
+import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
 const ManagerPageLayout = () => {
-    
+    const location = useLocation();
+    const [user, setUser] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const fetchUser = async () => {
+            const resObject = await getUser();
+            setUser(resObject.user);
+            setIsLoading(false);
+        };
+        fetchUser();
+    }, []);
 
+    const logout = () => {
+        window.open('https://stem-backend.vercel.app/auth/logout', '_self');
+        localStorage.setItem('success', 'false');
+    }
+    if (isLoading) {
+
+        return <><Spin /></>;
+
+    }
+    function previous() {
+        if (location.pathname === '/manager') {
+        }
+        window.history.go(-1);
+    }
 
     return (
         <>
@@ -25,10 +52,10 @@ const ManagerPageLayout = () => {
                             icon={<UserOutlined />}
                             style={{ marginBottom: 20 }}
 
-                            // src={user?.photos?.[0]?.value}
+                            src={user ? user.Avatar : ''}
                         />
                         <Title level={4} style={{ marginTop: 0 }}>
-                            {/* {user?.displayName} */}
+                            {user ? user.Name : ''}
 
                         </Title>
                     </Space>
@@ -42,22 +69,26 @@ const ManagerPageLayout = () => {
 
 
                     <Header style={CHeader}>
-                        <Link to="/">
-                            <Button
-                                size={"large"}
-                                icon={<UploadOutlined style={{ fontSize: "200%" }} />}
-                                style={{
-                                    color: "#1890ff",
-                                    backgroundColor: "#fff",
-                                    borderColor: "1px solid #ccc",
-                                    boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
-                                    rotate: "90deg",
-                                    padding: 0,
-                                }}
-                            >
-
+                        {window.location.pathname != '/manager' && (
+                            <Button type="primary" onClick={previous} id="backward">
+                                Back
                             </Button>
-                        </Link>
+                        )}
+                        <Button
+                            size={"large"}
+                            icon={<UploadOutlined style={{ fontSize: "200%" }} />}
+                            style={{
+                                color: "#1890ff",
+                                backgroundColor: "#fff",
+                                borderColor: "1px solid #ccc",
+                                boxShadow: "0 -2px 8px rgba(0, 0, 0, 0.15)",
+                                rotate: "90deg",
+                                padding: 0,
+                            }}
+                            onClick={logout}
+                        >
+
+                        </Button>
                     </Header>
 
 

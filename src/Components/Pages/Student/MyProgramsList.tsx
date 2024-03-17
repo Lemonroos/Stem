@@ -49,7 +49,7 @@ const MyProgramList = () => {
                 <Row gutter={[16, 16]}>
                     {myPrograms.map((myProgram) => (
                         <Col key={myProgram.Id} xs={24} sm={12} md={8} lg={6}>
-                            <Link to={`./details/${myProgram.Id}`}>
+                            <Link to={`./details/${myProgram.ProgramId}`}>
                                 <Card
                                     cover={<img alt={myProgram.ProgramName} src={myProgram.Image} />}
                                     style={{ height: "100%", overflow: "hidden" }}
@@ -60,7 +60,8 @@ const MyProgramList = () => {
                                         title={myProgram.ProgramName}
                                         description={myProgram.Description}
                                     />
-                                </Card></Link>
+                                </Card>
+                                </Link>
                         </Col>
                     ))}
                 </Row>
