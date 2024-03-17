@@ -85,7 +85,7 @@ export const routes = createBrowserRouter([
     children: [
       // { index: true, element: <HomePage /> },
       {
-        path: "dashboard",
+        index: true,
         element: <SchoolAdminDashboard />,
       },
       { path: "groups", element: <GroupList /> },

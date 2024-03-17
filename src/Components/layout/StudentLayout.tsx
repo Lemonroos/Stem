@@ -4,18 +4,19 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import getUser from '../../config/auth';
+import Spin from '../UI/spin';
 import StudentSideNav from "./LayoutSider/StudentSideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
-import Spin from '../UI/spin'
 
 
 
 
-const StudentPageLayout = () => {
+const StudentPageLayout: React.FC = () => {
+  const location = useLocation();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -45,6 +46,11 @@ const StudentPageLayout = () => {
 
     return <><Spin /></>;
 
+  }
+  function previous() {
+    if (location.pathname === '/student') {
+    }
+    window.history.go(-1);
   }
   return (
     <>
@@ -77,6 +83,11 @@ const StudentPageLayout = () => {
 
 
           <Header style={CHeader}>
+            {window.location.pathname != '/student' && (
+              <Button type="primary" onClick={previous} id="backward">
+                Back
+              </Button>
+            )}
             <Button
               size={"large"}
               icon={<UploadOutlined style={{ fontSize: "200%" }} />}

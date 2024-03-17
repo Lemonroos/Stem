@@ -3,14 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import getUser from "../../../config/auth";
-import { ProgramAndGroup } from "../../models/Programs";
 import MySpin from "../../UI/spin";
+import { ProgramsOfAMember } from "../../models/Programs";
 
 const { Meta } = Card;
 
 const MyProgramList = () => {
+    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
     const [userId, setUserId] = useState<any>(null);
-    const [myPrograms, setMyPrograms] = useState<ProgramAndGroup[]>([]);
+    const [myPrograms, setMyPrograms] = useState<ProgramsOfAMember[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         const fetchUser = async () => {
@@ -23,7 +24,6 @@ const MyProgramList = () => {
     }, []);
     // const studentId = userId;
     console.log(userId);
-    const progamsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/programs-of-a-student';
     async function getProgramByStudentId() {
         try {
             await axios.get(`${progamsByStudentUrl}?StudentId=${userId}`)
@@ -31,6 +31,7 @@ const MyProgramList = () => {
                     setMyPrograms(res.data);
                     setIsLoading(false);
                 })
+
         } catch (error) {
             console.error("Error fetching programs:", error);
         }
@@ -48,17 +49,18 @@ const MyProgramList = () => {
                 <Row gutter={[16, 16]}>
                     {myPrograms.map((myProgram) => (
                         <Col key={myProgram.Id} xs={24} sm={12} md={8} lg={6}>
-                            <Card
-                                cover={<img alt={myProgram.ProgramName} src={myProgram.Image} />}
-                                style={{ height: "100%", overflow: "hidden" }}
-                                bordered={false}
-                                hoverable
-                            >
-                                <Meta
-                                    title={<Link to={`./details/${myProgram.Id}`}>{myProgram.ProgramName}</Link>}
-                                    description={myProgram.Description}
-                                />
-                            </Card>
+                            <Link to={`./details/${myProgram.Id}`}>
+                                <Card
+                                    cover={<img alt={myProgram.ProgramName} src={myProgram.Image} />}
+                                    style={{ height: "100%", overflow: "hidden" }}
+                                    bordered={false}
+                                    hoverable
+                                >
+                                    <Meta
+                                        title={myProgram.ProgramName}
+                                        description={myProgram.Description}
+                                    />
+                                </Card></Link>
                         </Col>
                     ))}
                 </Row>
