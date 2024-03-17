@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 interface DeleteProgramProps {
