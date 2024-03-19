@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Groups } from "../../models/Groups";
 import { MembersInGroup, MembersNotInGroup } from "../../models/Members";
+import MySpin from "../../UI/spin";
 const { Panel } = Collapse;
 const { Column } = Table;
 
@@ -62,7 +63,7 @@ const GroupDetails: React.FC = () => {
         membersNotInGroup.forEach(student => {
             axios.put(`${memberUrl}?Id=${student.Id}`, {
                 GroupId: groupId,
-            }).then((res) => {
+            }).then(() => {
                 alert('Student #' + student.Id + ' is added into this group')
             })
                 .catch(err => console.log(err));
@@ -72,7 +73,10 @@ const GroupDetails: React.FC = () => {
         getGroupInfo();
         getGroupMembers();
         getMembersNotInGroup()
-    }, [])
+    }, []);
+    if(isLoading){
+        <MySpin/>
+    } else
     return (
         <div>
             <h1>Details of group #{groupId}</h1>
