@@ -18,3 +18,11 @@ export interface MembersInGroup {
     StudentCode: string,
     FullName: string
 }
+export interface TeamMember {
+    MemberId: number;
+    StudentCode: string;
+    ClassCode: string;
+    FullName: string;
+    TeamId: number;
+    TeamName: string;
+}
