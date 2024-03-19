@@ -4,10 +4,10 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
 import { Link, Outlet } from 'react-router-dom';
-import StudentSideNav from "./LayoutSider/StudentSideNav";
 import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 import { useEffect, useState } from "react";
 import getUser from "../../config/auth";
+import TeacherSideNav from "./LayoutSider/TeacherSideNav";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
@@ -50,7 +50,7 @@ const TeacherPageLayout = () => {
         </Header>
 
         <Sider style={CSider} width={300}>
-          <StudentSideNav />
+          <TeacherSideNav />
         </Sider>
 
         <Layout style={{ marginLeft: 300 }}>

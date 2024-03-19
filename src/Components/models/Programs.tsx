@@ -21,5 +21,11 @@ export interface ProgramsOfAMember {
     CreatedDate: Date,
     UpdatedDate: Date,
     Description: string,
-    Image: string,
+    Image: string
+}
+export interface ProgramsOfATeacher {
+    ProgramId: number,
+    Description: string,
+    Name: string,
+    Image: string
 }

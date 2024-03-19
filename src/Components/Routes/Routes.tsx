@@ -20,6 +20,10 @@ import LabDetails from "../Pages/Student/LabDetails";
 
 import TeacherLayout from "../layout/TeacherLayout";
 import TeacherDashboard from "../Pages/Teacher/TeacherDashboard";
+import ProgramsOfTeacher from "../Pages/Teacher/ProgramsOfTeacher";
+import TeamSubmissions from "../Pages/Teacher/TeamSubmissions";
+import ProgramDetailsOfTeacher from "../Pages/Teacher/ProgramDetailsOfTeacher";
+import GroupDetailsOfTeacher from "../Pages/Teacher/GroupDetailsOfTeacher";
 
 import ManagerLayout from "../layout/ManagerLayout";
 import ManagerDashBoard from "../Pages/Manager/ManagerDashboard";
@@ -37,6 +41,9 @@ import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 import PrivateRoute from "../../config/RoleBasedRoutes";
 import AdminProgram from "../Pages/SystemAdmin/AdminProgram";
 import AdminProgramDetails from "../Pages/SystemAdmin/AdminProgramDetails";
+
+
+
 
 
 
@@ -126,7 +133,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "programs/details/:programId/groups/:groupId",
-        element: <GroupDetails/>,
+        element: <GroupDetails />,
       },
       {
         path: "submissions",
@@ -219,40 +226,20 @@ export const routes = createBrowserRouter([
         element: <TeacherDashboard />,
       },
       {
-        path: "details",
-
-        // teacher account details (info)
-      },
-      {
-        path: "my-groups",
-        element: <MyGroupList />,
-        // MYGROUP
-        // children: [
-        //   {
-        //     path: "details/:id",
-        //     element: <MyGroupDetails />,
-        //     //La chi tiet 1 group ma user dc co trong day. Khi lam thi kieu table va
-        //     //  display theo trinh tu team cung nhu hoc column team de biet user team nao
-        //   }
-        // ]
+        path: "team-submissions",
+        element: <TeamSubmissions />,
       },
       {
         path: "my-programs",
-        element: <MyProgramsList />,
-        // MYGROUP
-        children: [
-          {
-            path: "details/:id",
-            element: <MyProgramDetails />,
-            // children: [
-            //   {
-            //     path: "labs/:id",
-            //     element: </>,
-            //     // MY LABS
-            //   },
-            // ],
-          },
-        ],
+        element: <ProgramsOfTeacher />,
+      },
+      {
+        path: "my-programs/details/:programId",
+        element: <ProgramDetailsOfTeacher />,
+      },
+      {
+        path: "my-programs/details/:programId/groups/:groupId",
+        element: <GroupDetailsOfTeacher />,
       },
     ],
   },
