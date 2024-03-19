@@ -9,3 +9,8 @@ export interface Groups {
     ProgramCode: string,
     ProgramName: string
 }
+export interface GroupCodeAndName{
+    Id: number,
+    GroupCode: string,
+    Name: string
+}
