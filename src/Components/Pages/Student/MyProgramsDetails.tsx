@@ -8,7 +8,7 @@ import { Labs } from "../../models/Labs";
 
 const { Text } = Typography;
 
-const MyPrograms = () => {
+const MyProgram = () => {
     const progUrl = "https://stem-backend.vercel.app/api/v1/programs";
     const labsInProgramUrl = "https://stem-backend.vercel.app/api/v1/labs/lab-list/labs-in-program?ProgramId=";
     const progId = String(useParams().id);
@@ -136,4 +136,4 @@ const MyPrograms = () => {
     );
 };
 
-export default MyPrograms;
+export default MyProgram;

@@ -23,6 +23,10 @@ import TeacherDashboard from "../Pages/Teacher/TeacherDashboard";
 
 import ManagerLayout from "../layout/ManagerLayout";
 import ManagerDashBoard from "../Pages/Manager/ManagerDashboard";
+import ProgramList from "../Pages/Manager/ProgramList";
+import Submissions from "../Pages/Manager/Submissions";
+import ProgramDetailsOfManager from "../Pages/Manager/ProgramDetailsOfManager";
+import GroupDetails from "../Pages/Manager/GroupDetails";
 
 import SystemAdminPageLayout from "../layout/AdminLayout";
 import SystemAdminDashboard from "../Pages/SystemAdmin/SystemAdminDashboard";
@@ -33,6 +37,10 @@ import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 import PrivateRoute from "../../config/RoleBasedRoutes";
 import AdminProgram from "../Pages/SystemAdmin/AdminProgram";
 import AdminProgramDetails from "../Pages/SystemAdmin/AdminProgramDetails";
+
+
+
+
 
 export const routes = createBrowserRouter([
   {
@@ -73,7 +81,7 @@ export const routes = createBrowserRouter([
       },
       { path: "groups", element: <GroupList /> },
       { path: "programs", element: <AdminProgram /> },
-      { path: "programs/details/:id", element: <AdminProgramDetails/>}
+      { path: "programs/details/:id", element: <AdminProgramDetails /> }
     ],
   },
   {
@@ -108,6 +116,22 @@ export const routes = createBrowserRouter([
       //   //   element: <Dashboard />,
       //   // },
       //   // { path: "groups", element: <GroupList /> },
+      {
+        path: "programs",
+        element: <ProgramList />,
+      },
+      {
+        path: "programs/details/:id",
+        element: <ProgramDetailsOfManager />,
+      },
+      {
+        path: "programs/details/:programId/groups/:groupId",
+        element: <GroupDetails/>,
+      },
+      {
+        path: "submissions",
+        element: <Submissions />,
+      },
     ],
   },
   {
