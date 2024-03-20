@@ -1,10 +1,10 @@
-import { Card, Col, Row, Tabs } from "antd";
+import { Card, Col, Divider, Row, Tabs } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Labs } from "../../models/Labs";
 import TabPane from "antd/es/tabs/TabPane";
-import { Upload, Button, Spin, message, UploadFile, Collapse, Typography, Space } from 'antd';
+import { Upload, Button,  message, UploadFile, Collapse, Typography, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/firebase";
@@ -91,7 +91,7 @@ const LabDetails: React.FC = () => {
     useEffect(() => {
         if (teamId && labId) {
             fetchSolutionData();
-            setIsLoading(false)
+            setIsLoading(false);
         }
     }, [teamId, labId]);
 
@@ -118,6 +118,8 @@ const LabDetails: React.FC = () => {
             setFile(file);
         }
     };
+
+
 
     useEffect(() => {
         const uploadFile = () => {
@@ -152,6 +154,7 @@ const LabDetails: React.FC = () => {
         file && uploadFile();
     }, [file]);
 
+
     const handleUpload = async () => {
         if (progress < 100) {
             // Your upload logic here
@@ -180,6 +183,14 @@ const LabDetails: React.FC = () => {
 
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 8000); // Set the timeout duration as per your requirement
+
+        return () => clearTimeout(timer); // This will clear the timeout if the component unmounts before the timeout finishes
+    }, []);
+
 
     if (isLoading) {
         return <div><MySpin /></div>
@@ -198,47 +209,47 @@ const LabDetails: React.FC = () => {
                     </Col>
                 </Row>
             </Card>
+            <Divider />
+            {teamId ? (
+                <Tabs defaultActiveKey="1">
+                    <TabPane tab="TEAM" key="1">
+                        <Collapse accordion>
+                            {teamMembers.map((member, index) => (
+                                <Panel header={member.FullName} key={index}>
+                                    <p>Student Code: {member.StudentCode}</p>
+                                    <p>Class Code: {member.ClassCode}</p>
+                                </Panel>
+                            ))}
+                        </Collapse>
+                    </TabPane>
+                    <TabPane tab="SUBMISSION" key="2" style={{ width: '100%' }}>
+                        <Space direction="vertical" style={{ padding: '1em', backgroundColor: '#f0f2f5', borderRadius: '5px', width: '100%' }}>
+                            <Upload
+                                name="labImage"
+                                listType="picture"
+                                maxCount={1}
+                                beforeUpload={() => false}
+                                onChange={handleFileChange}
+                                fileList={fileList}
+                                onRemove={handleRemove}
+                            >
+                                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                            </Upload>
+                            <Button
+                                type="primary"
+                                onClick={handleUpload}
+                                disabled={!file || progress < 100 || isGraded}
+                                style={{ marginTop: '1em' }}
+                            >
+                                {!file ? 'Start Upload' : progress < 100 ? 'Uploading...' : 'Submit File'}
+                            </Button>
+                        </Space>
+                    </TabPane>
 
-            <Tabs defaultActiveKey="1">
-                <TabPane tab="TEAM" key="1">
-                    <Collapse accordion>
-                        {teamMembers.map((member, index) => (
-                            <Panel header={member.FullName} key={index}>
-                                <p>Student Code: {member.StudentCode}</p>
-                                <p>Class Code: {member.ClassCode}</p>
-                            </Panel>
-                        ))}
-                    </Collapse>
-                </TabPane>
-                <TabPane tab="SUBMISSION" key="2" style={{ width: '100%' }}>
-                    <Space direction="vertical" style={{ padding: '1em', backgroundColor: '#f0f2f5', borderRadius: '5px', width: '100%' }}>
-                        <Upload
-                            name="labImage"
-                            listType="picture"
-                            maxCount={1}
-                            beforeUpload={() => false}
-                            onChange={handleFileChange}
-                            fileList={fileList}
-                            onRemove={handleRemove}
-                        >
-                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                        </Upload>
-                        <Button
-                            type="primary"
-                            onClick={handleUpload}
-                            disabled={!file || progress < 100 || isGraded}
-                            style={{ marginTop: '1em' }}
-                        >
-                            {!file ? 'Start Upload' : progress < 100 ? 'Uploading...' : 'Submit File'}
-                        </Button>
-                    </Space>
-                </TabPane>
-
-                <TabPane tab="GRADE" key="3" style={{ width: '100%' }}>
-                    {solutionData ? (
+                    <TabPane tab="GRADE" key="3" style={{ width: '100%' }}>
                         <Space direction="vertical" style={{ padding: '1em', backgroundColor: '#f0f2f5', borderRadius: '5px', width: '100%' }}>
                             <Title level={4} style={{ color: '#1890ff' }}>Solution:</Title>
-                            {solutionData.Solution ? (
+                            {solutionData?.Solution ? (
                                 (
                                     <Button type="primary" href={solutionData.Solution} target="_blank">
                                         Download Solution
@@ -248,18 +259,17 @@ const LabDetails: React.FC = () => {
                                 'N/A'
                             )}
                             <Title level={4} style={{ color: '#1890ff', marginTop: '1em' }}>Score:</Title>
-                            <p style={{ fontSize: '1.2em', fontWeight: 'bold' }}>{solutionData.Score || 'N/A'}</p>
+                            <p style={{ fontSize: '1.2em', fontWeight: 'bold' }}>{solutionData?.Score || 'N/A'}</p>
                         </Space>
-                    ) : (
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                            <Spin size="large" />
-                        </div>
-                    )}
-                </TabPane>
-
-
-            </Tabs>
+                    </TabPane>
+                </Tabs>
+            ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                    <Title level={2}>You're not in a team yet!</Title>
+                    <p>Please join a team to be able to do the lab. If you need assistance, contact your teacher.</p>
+                </div>
+            )}
         </div>
-    )
+    );
 }
 export default LabDetails
