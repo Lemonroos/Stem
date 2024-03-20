@@ -110,7 +110,7 @@ const SolutionDetailsOfManager: React.FC = () => {
                         <Form.Item label="Score" required>
                             <Input type="number" required
                                 value={score}
-                                placeholder="Group Name"
+                                placeholder="Enter the new score"
                                 onChange={(e) => setScore(Number(e.target.value))}
                                 min={0} max={10}
                             />
