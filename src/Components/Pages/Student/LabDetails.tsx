@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Labs } from "../../models/Labs";
 import TabPane from "antd/es/tabs/TabPane";
-import { Upload, Button, message, UploadFile, Collapse, Typography, Space } from 'antd';
+import { Upload, Button, Spin, message, UploadFile, Collapse, Typography, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/firebase";
@@ -12,7 +12,8 @@ import getUser from "../../../config/auth";
 import { TeamMember, TeamSolution } from "../../models/Members";
 import MySpin from "../../UI/spin";
 const { Panel } = Collapse;
-const { Title, Link } = Typography;
+
+const { Title } = Typography;
 const LabDetails: React.FC = () => {
     const { programId, labId } = useParams();
     const labByIdUrl = 'https://stem-backend.vercel.app/api/v1/labs';
@@ -91,7 +92,7 @@ const LabDetails: React.FC = () => {
             fetchSolutionData();
             setIsLoading(false)
         }
-    }, [teamId,labId]);
+    }, [teamId, labId]);
 
 
 
@@ -203,45 +204,54 @@ const LabDetails: React.FC = () => {
                         ))}
                     </Collapse>
                 </TabPane>
-                <TabPane tab="SUBMISSION" key="2">
-                    <Upload
-                        name="labImage"
-                        listType="picture"
-                        maxCount={1}
-                        beforeUpload={() => false}
-                        onChange={handleFileChange}
-                        fileList={fileList}
-                        onRemove={handleRemove}
-                    >
-                        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                    </Upload>
-                    <Button
-                        type="primary"
-                        onClick={handleUpload}
-                        disabled={!file || progress < 100}
-                        style={{ marginTop: 16 }}
-                    >
-                        {!file ? 'Start Upload' : progress < 100 ? 'Uploading...' : 'Submit File'}
-                    </Button>
-
+                <TabPane tab="SUBMISSION" key="2" style={{ width: '100%' }}>
+                    <Space direction="vertical" style={{ padding: '1em', backgroundColor: '#f0f2f5', borderRadius: '5px', width: '100%' }}>
+                        <Upload
+                            name="labImage"
+                            listType="picture"
+                            maxCount={1}
+                            beforeUpload={() => false}
+                            onChange={handleFileChange}
+                            fileList={fileList}
+                            onRemove={handleRemove}
+                        >
+                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                        </Upload>
+                        <Button
+                            type="primary"
+                            onClick={handleUpload}
+                            disabled={!file || progress < 100}
+                            style={{ marginTop: '1em' }}
+                        >
+                            {!file ? 'Start Upload' : progress < 100 ? 'Uploading...' : 'Submit File'}
+                        </Button>
+                    </Space>
                 </TabPane>
-                <TabPane tab="GRADE" key="3">
+
+                <TabPane tab="GRADE" key="3" style={{ width: '100%' }}>
                     {solutionData ? (
-                        <Space direction="vertical">
-                            <Title level={4}>Solution:</Title>
-                            <Link href={solutionData.Solution} target="_blank">
-                                {solutionData.Solution || 'N/A'}
-                            </Link>
-                            <Title level={4}>Score:</Title>
-                            <p>{solutionData.Score || 'N/A'}</p>
+                        <Space direction="vertical" style={{ padding: '1em', backgroundColor: '#f0f2f5', borderRadius: '5px', width: '100%' }}>
+                            <Title level={4} style={{ color: '#1890ff' }}>Solution:</Title>
+                            {solutionData.Solution ? (
+                                (
+                                    <Button type="primary" href={solutionData.Solution} target="_blank">
+                                        Download Solution
+                                    </Button>
+                                )
+                            ) : (
+                                'N/A'
+                            )}
+                            <Title level={4} style={{ color: '#1890ff', marginTop: '1em' }}>Score:</Title>
+                            <p style={{ fontSize: '1.2em', fontWeight: 'bold' }}>{solutionData.Score || 'N/A'}</p>
                         </Space>
                     ) : (
-                        <p>Loading...</p>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <Spin size="large" />
+                        </div>
                     )}
                 </TabPane>
-                <TabPane tab="TEACHER'S MESSAGE" key="4">
-                    {/* Teacher's message content */}
-                </TabPane>
+
+
             </Tabs>
         </div>
     )
