@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Labs } from "../../models/Labs";
 import TabPane from "antd/es/tabs/TabPane";
-import { Upload, Button, message, UploadFile, Collapse} from 'antd';
+import { Upload, Button, message, UploadFile, Collapse } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/firebase";
 import getUser from "../../../config/auth";
 import { TeamMember } from "../../models/Members";
+import MySpin from "../../UI/spin";
 const { Panel } = Collapse;
 const LabDetails: React.FC = () => {
     const { programId, labId } = useParams();
@@ -23,12 +24,13 @@ const LabDetails: React.FC = () => {
     const [teamId, setTeamId] = useState(null);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
 
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     async function getLabsInProgramm() {
         await axios.get(`${labByIdUrl}/${labId}`)
             .then(data => {
                 setLab(data.data)
             })
+        console.log("Lab: " + labId)
     }
     useEffect(() => {
         getLabsInProgramm()
@@ -40,13 +42,13 @@ const LabDetails: React.FC = () => {
         setTeamId(response.data.TeamId);
         // console.log("here", response.data.teamId);
     };
-    
+
 
     useEffect(() => {
         const fetchUser = async () => {
             const resObject = await getUser();
             setUserId(resObject.userId);
-            // setIsLoading(false);
+            setIsLoading(false);
         };
         fetchUser();
     }, []);
@@ -56,7 +58,7 @@ const LabDetails: React.FC = () => {
             fetchTeamId();
         }
     }, [userId, programId]);
-    
+
     const fetchTeamMembers = async () => {
         const response = await axios.get(`https://stem-backend.vercel.app/api/v1/member-in-team?TeamId=${teamId}`);
         setTeamMembers(response.data);
@@ -66,16 +68,11 @@ const LabDetails: React.FC = () => {
         console.log('teamId:', teamId);
         if (teamId) {
             fetchTeamMembers();
-
+            setIsLoading(false)
         }
     }, [teamId]);
 
 
-    // const groupData = [
-    //     {
-    //         title: '4 (6 students) - Your team',
-    //     },
-    // ];
     const handleRemove = (file: UploadFile) => {
         // Update the state to remove the file from the list
         setFileList(prevList => prevList.filter(item => item.uid !== file.uid));
@@ -133,15 +130,31 @@ const LabDetails: React.FC = () => {
         if (progress < 100) {
             // Your upload logic here
         } else {
-            console.log(data)
-            message.success('Upload complete!');
-            // setUploading(false);
+            console.log(data);
+            try {
+                const response = await axios.post(`https://stem-backend.vercel.app/api/v1/team-solution?LabId=${labId}&TeamId=${teamId}`, {
+                    Solution: data,
+                });
+
+                if (response.status !== 200) {
+                    throw new Error('HTTP status ' + response.status);
+                }
+
+                message.success('Upload complete!');
+                // setUploading(false);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
-        // console.log(data)
         setTimeout(() => {
             message.success('Upload successful!');
         }, 1000);
     };
+
+    if (isLoading) {
+        return <div><MySpin /></div>
+    }
+
     return (
         <div>
             <h1>{lab?.Code}: {lab?.Topic}</h1>
@@ -157,16 +170,16 @@ const LabDetails: React.FC = () => {
             </Card>
 
             <Tabs defaultActiveKey="1">
-            <TabPane tab="TEAM" key="1">
-    <Collapse accordion>
-        {teamMembers.map((member, index) => (
-            <Panel header={member.FullName} key={index}>
-                <p>Student Code: {member.StudentCode}</p>
-                <p>Class Code: {member.ClassCode}</p>
-            </Panel>
-        ))}
-    </Collapse>
-</TabPane>
+                <TabPane tab="TEAM" key="1">
+                    <Collapse accordion>
+                        {teamMembers.map((member, index) => (
+                            <Panel header={member.FullName} key={index}>
+                                <p>Student Code: {member.StudentCode}</p>
+                                <p>Class Code: {member.ClassCode}</p>
+                            </Panel>
+                        ))}
+                    </Collapse>
+                </TabPane>
                 <TabPane tab="SUBMISSION" key="2">
                     <Upload
                         name="labImage"
