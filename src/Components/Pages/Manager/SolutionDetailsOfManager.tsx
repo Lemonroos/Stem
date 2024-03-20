@@ -20,7 +20,6 @@ const SolutionDetailsOfManager: React.FC = () => {
 
     const [editScoreVisible, setEditScoreVisible] = useState(false);
     async function getSolutionDetails() {
-        console.log(solutionId)
         await axios.get(`${teamSolutionUrl}/${solutionId}`)
             .then((res) => {
                 setSolutionDetails(res.data);
