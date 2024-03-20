@@ -2,9 +2,9 @@ import { Button, Collapse, Modal, Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import MySpin from "../../UI/spin";
 import { Groups } from "../../models/Groups";
 import { MembersInGroup, MembersNotInGroup } from "../../models/Members";
-import MySpin from "../../UI/spin";
 const { Panel } = Collapse;
 const { Column } = Table;
 
@@ -64,7 +64,8 @@ const GroupDetails: React.FC = () => {
             axios.put(`${memberUrl}?Id=${student.Id}`, {
                 GroupId: groupId,
             }).then(() => {
-                alert('Student #' + student.Id + ' is added into this group')
+                alert('Student #' + student.Id + ' is added into this group');
+                window.location.reload();
             })
                 .catch(err => console.log(err));
         });
@@ -74,49 +75,48 @@ const GroupDetails: React.FC = () => {
         getGroupMembers();
         getMembersNotInGroup()
     }, []);
-    if(isLoading){
-        <MySpin/>
+    if (isLoading) {
+        return <MySpin />
     } else
-    return (
-        <div>
-            <h1>Details of group #{groupId}</h1>
-            <strong>Group Code: </strong>{groupInfo?.GroupCode} -
-            <strong>Group Name:</strong> "{groupInfo?.GroupName}" -
-            <strong>Teacher:</strong> {groupInfo?.TeacherName}
-            <Collapse accordion>
-                <Panel header="Members" key="1">
-                    {groupMembers.length > 0 ?
-                        <Table dataSource={groupMembers} rowKey="Id" pagination={false}>
-                            <Column title="Full Name" dataIndex="FullName" key="FullName" />
-                            <Column title="Student Code" dataIndex="StudentCode" key="StudentCode" />
-                        </Table>
-                        : <>
-                            No member found
-                        </>}
-                    {membersNotInGroup.length > 0 && <Button block type="primary" onClick={openAddToExistingModal}>Add members</Button>}
-                </Panel>
-            </Collapse>
-            {/* Add to existing groups modal */}
-            <Modal
-                title={membersNotInGroup.length > 0 ? "Enrolled students that are not in groups" : "No other student has enrolled in this program"}
-                visible={addToExistingVisible}
-                onCancel={() => setAddToExistingVisible(false)}
-                footer={null} // Hide default footer buttons
-            >
-                {membersNotInGroup.length > 0 &&
-                    <>
-                        <Table dataSource={membersNotInGroup} rowKey="Id" pagination={false}>
-                            <Column title="Full Name" dataIndex="FullName" key="FullName" />
-                            <Column title="Class Code" dataIndex="ClassCode" key="ClassCode" />
-                        </Table>
+        return (
+            <div>
+                <h1>Details of group #{groupInfo?.GroupCode}</h1>
+                <strong>Group Name:</strong> "{groupInfo?.GroupName}" -
+                <strong>Teacher:</strong> {groupInfo?.TeacherName}
+                <Collapse accordion>
+                    <Panel header="Members" key="1">
+                        {groupMembers.length > 0 ?
+                            <Table dataSource={groupMembers} rowKey="Id" pagination={false}>
+                                <Column title="Full Name" dataIndex="FullName" key="FullName" />
+                                <Column title="Student Code" dataIndex="StudentCode" key="StudentCode" />
+                            </Table>
+                            : <>
+                                No member found
+                            </>}
+                        {membersNotInGroup.length > 0 && <Button block type="primary" onClick={openAddToExistingModal}>Add members</Button>}
+                    </Panel>
+                </Collapse>
+                {/* Add to existing groups modal */}
+                <Modal
+                    title={membersNotInGroup.length > 0 ? "Enrolled students that are not in groups" : "No other student has enrolled in this program"}
+                    visible={addToExistingVisible}
+                    onCancel={() => setAddToExistingVisible(false)}
+                    footer={null} // Hide default footer buttons
+                >
+                    {membersNotInGroup.length > 0 &&
                         <>
-                            <hr />
-                            <Button block type="primary"
-                                onClick={addStudentsIntoGroup}>Add these students into this group</Button>
+                            <Table dataSource={membersNotInGroup} rowKey="Id" pagination={false}>
+                                <Column title="Full Name" dataIndex="FullName" key="FullName" />
+                                <Column title="Class Code" dataIndex="ClassCode" key="ClassCode" />
+                            </Table>
+                            <>
+                                <hr />
+                                <Button block type="primary"
+                                    onClick={addStudentsIntoGroup}>Add these students into this group</Button>
+                            </>
                         </>
-                    </>
-                }
-                {/* <Form layout="vertical">
+                    }
+                    {/* <Form layout="vertical">
                         <Form.Item label="Select a Group" required>
                             <Select
                                 style={{ width: 200 }}
@@ -131,8 +131,8 @@ const GroupDetails: React.FC = () => {
                         </Form.Item>
                         <Button block type="primary">Add students into this group</Button>
                     </Form> */}
-            </Modal>
-        </div>
-    )
+                </Modal>
+            </div>
+        )
 }
 export default GroupDetails;
