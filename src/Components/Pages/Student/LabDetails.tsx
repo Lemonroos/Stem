@@ -27,6 +27,7 @@ const LabDetails: React.FC = () => {
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [solutionData, setSolutionData] = useState<TeamSolution>();
     const [isLoading, setIsLoading] = useState(true);
+    const [isGraded, setIsGraded] = useState(false);
     async function getLabsInProgramm() {
         await axios.get(`${labByIdUrl}/${labId}`)
             .then(data => {
@@ -150,6 +151,7 @@ const LabDetails: React.FC = () => {
         };
         file && uploadFile();
     }, [file]);
+
     const handleUpload = async () => {
         if (progress < 100) {
             // Your upload logic here
@@ -166,14 +168,18 @@ const LabDetails: React.FC = () => {
 
                 message.success('Upload complete!');
                 // setUploading(false);
-            } catch (error) {
-                console.error('Error:', error);
+            } catch (error: any) {
+                // console.error('Error:', error);
+                message.error(error.response.data.error)
+                // if (error instanceof AxiosError && error.response && error.response.status === 400) {
+                //     message.error('The file cannot be submitted as it has already been graded.');
+                setIsGraded(true);
+                // }
             }
         }
-        setTimeout(() => {
-            message.success('Upload successful!');
-        }, 1000);
+
     };
+
 
     if (isLoading) {
         return <div><MySpin /></div>
@@ -220,7 +226,7 @@ const LabDetails: React.FC = () => {
                         <Button
                             type="primary"
                             onClick={handleUpload}
-                            disabled={!file || progress < 100}
+                            disabled={!file || progress < 100 || isGraded}
                             style={{ marginTop: '1em' }}
                         >
                             {!file ? 'Start Upload' : progress < 100 ? 'Uploading...' : 'Submit File'}
