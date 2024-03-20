@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Route } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import ErrorPage from "../Pages/Error/ErrorPage";
 import AboutUs from "../Pages/Home/AboutUs";
@@ -37,6 +37,7 @@ import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 import PrivateRoute from "../../config/RoleBasedRoutes";
 import AdminProgram from "../Pages/SystemAdmin/AdminProgram";
 import AdminProgramDetails from "../Pages/SystemAdmin/AdminProgramDetails";
+import LabsDetail from "../Pages/SystemAdmin/LabsDetail";
 
 
 
@@ -81,7 +82,8 @@ export const routes = createBrowserRouter([
       },
       { path: "groups", element: <GroupList /> },
       { path: "programs", element: <AdminProgram /> },
-      { path: "programs/details/:id", element: <AdminProgramDetails /> }
+      { path: "programs/details/:id", element: <AdminProgramDetails /> },
+      { path: "programs/details/:id/labs/:id", element: <LabsDetail />  }
     ],
   },
   {

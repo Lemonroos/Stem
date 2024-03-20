@@ -27,15 +27,8 @@ const AdminProgramDetails: React.FC = () => {
   const [labs, setLabs] = useState<Labs[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<any>();
-  const [open, setOpen] = useState(false);
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const showLabs = () => {
-    setOpen(false);
-  }
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [createLabsModalOpen, setCreateLabsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProgramDetails = async () => {
@@ -56,61 +49,79 @@ const AdminProgramDetails: React.FC = () => {
     fetchProgramDetails();
   }, [programId]);
 
+  // const handleDeleteModalOpen = () => {
+  //   setDeleteModalOpen(true);
+  // };
+
+  const handleDeleteModalClose = () => {
+    setDeleteModalOpen(false);
+  };
+
+  const handleCreateLabsModalOpen = () => {
+    setCreateLabsModalOpen(true);
+  };
+
+  const handleCreateLabsModalClose = () => {
+    setCreateLabsModalOpen(false);
+  };
+
+
+  const addNewLab = (newLab: Labs) => {
+    setLabs([newLab, ...labs]);
+  };
+
   if (isLoading) {
     return <MySpin />;
   }
 
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-
   if (!programDetails) {
     return <div>Program details not found</div>;
   }
+
   const onChange = (key: string | string[]) => {
     console.log(key);
-};
+  };
 
-const items: CollapseProps["items"] = [];
-if (labs.length > 0) {
-  labs.forEach((lab) => {
-    items.push({
-      key: lab.Id,
-      label: lab.Code,
-      children: (
-        <div>
-          <strong>Topic</strong>
-          <p>{lab.Topic}</p>
-          <strong>Description</strong>
-          <p>{lab.Description}</p>
-          <br />
-          <Link to={`./labs/${lab.Id}`}>
-            <Button type="primary" block>
-              Details
-            </Button>
-          </Link>
-        </div>
-      ),
+  const items: CollapseProps["items"] = [];
+  if (labs.length > 0) {
+    labs.forEach((lab) => {
+      items.push({
+        key: lab.Id,
+        label: lab.Code,
+        children: (
+          <div>
+            <strong>Topic</strong>
+            <p>{lab.Topic}</p>
+            <strong>Description</strong>
+            <p>{lab.Description}</p>
+            <br />
+            <Link to={`./labs/${lab.Id}`}>
+              <Button type="primary" block>
+                Details
+              </Button>
+            </Link>
+          </div>
+        ),
+      });
     });
-  });
-} else {
-  items.push({
-    key: "no-labs",
-    label: "No Labs Found",
-    children: <p>There are currently no labs associated with this program.</p>,
-  });
-}
+  } else {
+    items.push({
+      key: "no-labs",
+      label: "No Labs Found",
+      children: <p>There are currently no labs associated with this program.</p>,
+    });
+  }
 
   return (
     <div style={{ padding: "24px" }}>
-      <Button type="primary" onClick={showModal} style={{ marginBottom: 16 }}>
+      {/* <Button type="primary" onClick={handleDeleteModalOpen} style={{ marginBottom: 16 }}>
         Delete Program
-      </Button>
-      <DeleteProgram open={open} setOpen={setOpen} />
-      {/* <Button type="primary" onClick={showLabs} style={{ marginBottom: 16 }}>
+      </Button> */}
+      <DeleteProgram open={deleteModalOpen} setOpen={handleDeleteModalClose} />
+      <Button type="primary" onClick={handleCreateLabsModalOpen} style={{ marginBottom: 16 }}>
         Create Lab
       </Button>
-      <CreateLabs open={open} setOpen={setOpen} /> */}
+      <CreateLabs open={createLabsModalOpen} setOpen={handleCreateLabsModalClose} addNewLab={addNewLab} />
       <Card>
         <Row gutter={[16, 16]} style={{ marginBottom: "5%" }}>
           <Col>

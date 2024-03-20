@@ -2,14 +2,16 @@ import { DatePicker, Form, Input, Modal } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Labs } from "../../models/Labs";
 
 interface CreateLabProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  addNewLab: (newLab: Labs) => void; // Prop để thêm lab mới
 }
 
 const { TextArea } = Input;
-const CreateLabs = ({ open, setOpen }: CreateLabProps) => {
+const CreateLabs = ({ open, setOpen, addNewLab }: CreateLabProps) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [topic, setTopic] = useState("");
@@ -21,20 +23,9 @@ const CreateLabs = ({ open, setOpen }: CreateLabProps) => {
   const handleCancel = () => {
     setOpen(false);
   };
+
   const handleSubmit = async () => {
-    if (startDate.length === 0) {
-      return;
-    }
-    if (endDate.length === 0) {
-      return;
-    }
-    if (topic.length === 0) {
-      return;
-    }
-    if (description.length === 0) {
-      return;
-    }
-    if (image.length === 0) {
+    if (startDate.length === 0 || endDate.length === 0 || topic.length === 0 || description.length === 0 || image.length === 0) {
       return;
     }
 
@@ -45,9 +36,13 @@ const CreateLabs = ({ open, setOpen }: CreateLabProps) => {
       Description: description,
       Image: image,
     };
+
     const url = `https://stem-backend.vercel.app/api/v1/labs?ProgramId=${programId}`;
+    
     try {
-      await axios.post(url, labData);
+      const response = await axios.post(url, labData);
+      // Gọi hàm addNewLab với lab mới được trả về từ API
+      addNewLab(response.data);
       setStartDate("");
       setEndDate("");
       setTopic("");
@@ -63,11 +58,12 @@ const CreateLabs = ({ open, setOpen }: CreateLabProps) => {
       setConfirmLoading(false);
     }
   };
+
   return (
     <div>
       <Modal
         title="Add Lab"
-        open={open}
+        visible={open}
         onOk={handleSubmit}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
@@ -110,4 +106,5 @@ const CreateLabs = ({ open, setOpen }: CreateLabProps) => {
     </div>
   );
 };
+
 export default CreateLabs;
