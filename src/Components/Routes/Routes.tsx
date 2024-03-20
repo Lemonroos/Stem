@@ -24,6 +24,7 @@ import ProgramsOfTeacher from "../Pages/Teacher/ProgramsOfTeacher";
 import TeamSubmissions from "../Pages/Teacher/TeamSubmissions";
 import ProgramDetailsOfTeacher from "../Pages/Teacher/ProgramDetailsOfTeacher";
 import GroupDetailsOfTeacher from "../Pages/Teacher/GroupDetailsOfTeacher";
+import TeamDetailsOfTeacher from "../Pages/Teacher/TeamDetailsOfTeacher";
 
 import ManagerLayout from "../layout/ManagerLayout";
 import ManagerDashBoard from "../Pages/Manager/ManagerDashboard";
@@ -31,6 +32,7 @@ import ProgramList from "../Pages/Manager/ProgramList";
 import Submissions from "../Pages/Manager/Submissions";
 import ProgramDetailsOfManager from "../Pages/Manager/ProgramDetailsOfManager";
 import GroupDetails from "../Pages/Manager/GroupDetails";
+import SolutionDetailsOfManager from "../Pages/Manager/SolutionDetailsOfManager";
 
 import SystemAdminPageLayout from "../layout/AdminLayout";
 import SystemAdminDashboard from "../Pages/SystemAdmin/SystemAdminDashboard";
@@ -41,6 +43,8 @@ import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 import PrivateRoute from "../../config/RoleBasedRoutes";
 import AdminProgram from "../Pages/SystemAdmin/AdminProgram";
 import AdminProgramDetails from "../Pages/SystemAdmin/AdminProgramDetails";
+
+
 
 
 
@@ -138,6 +142,10 @@ export const routes = createBrowserRouter([
       {
         path: "submissions",
         element: <Submissions />,
+      },
+      {
+        path: "submissions/:solutionId/details",
+        element: <SolutionDetailsOfManager />,
       },
     ],
   },
@@ -240,6 +248,10 @@ export const routes = createBrowserRouter([
       {
         path: "my-programs/details/:programId/groups/:groupId",
         element: <GroupDetailsOfTeacher />,
+      },
+      {
+        path: "my-programs/details/:programId/groups/:groupId/teams/:teamId",
+        element: <TeamDetailsOfTeacher />,
       },
     ],
   },

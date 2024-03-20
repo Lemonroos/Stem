@@ -18,8 +18,7 @@ const CustomPagination = ({ totalItems, currentPage, itemsPerPage, onChange }: a
     };
 
     return (
-        <div>
-            <span>Page:</span>
+        <Row style={{ marginTop: '1%',display: "flex", justifyContent: 'center', alignItems: 'center' }}>
             <Pagination
                 current={currentPage}
                 total={totalItems}
@@ -38,7 +37,7 @@ const CustomPagination = ({ totalItems, currentPage, itemsPerPage, onChange }: a
                 <Option value={10}>10</Option>
                 <Option value={20}>20</Option>
             </Select>
-        </div>
+        </Row>
     );
 };
 
@@ -106,29 +105,31 @@ const ProgramList: React.FC = () => {
     } else
         return (
             <div>
-                {/* Search bar */}
-                <Input
-                    placeholder="Enter name"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ width: 200, marginRight: 16 }}
-                />
-                <Select
-                    value={order}
-                    onChange={handleOrderChange}
-                    style={{ width: 120, marginRight: 16 }}
-                >
-                    <Option value="asc">Ascending</Option>
-                    <Option value="desc">Descending</Option>
-                </Select>
-                <Select
-                    value={sortField}
-                    onChange={handleSortFieldChange}
-                    style={{ width: 120, marginRight: 16 }}
-                >
-                    <Option value="Id">Id</Option>
-                    <Option value="Name">Name</Option>
-                </Select>
+                <Row style={{ marginBottom:'1%',display: "flex", justifyContent: 'center', alignItems: 'center' }}>
+                    {/* Search bar */}
+                    <Input
+                        placeholder="Enter name"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        style={{ width: 200, marginRight: 16 }}
+                    />
+                    <Select
+                        value={order}
+                        onChange={handleOrderChange}
+                        style={{ width: 120, marginRight: 16 }}
+                    >
+                        <Option value="asc">Ascending</Option>
+                        <Option value="desc">Descending</Option>
+                    </Select>
+                    <Select
+                        value={sortField}
+                        onChange={handleSortFieldChange}
+                        style={{ width: 120, marginRight: 16 }}
+                    >
+                        <Option value="Id">Id</Option>
+                        <Option value="Name">Name</Option>
+                    </Select>
+                </Row>
 
                 <Row gutter={16}>
                     {programs.map(program => (
