@@ -29,17 +29,15 @@ const ManagerPageLayout = () => {
         window.open('https://stem-backend.vercel.app/auth/logout', '_self');
         localStorage.setItem('success', 'false');
     }
-    if (isLoading) {
-
-        return <><Spin /></>;
-
-    }
     function previous() {
         if (location.pathname === '/manager') {
         }
         window.history.go(-1);
     }
-
+    
+    if (isLoading) {
+        return <Spin />;
+    } else
     return (
         <>
             <Layout style={{ height: "100vh" }}>
