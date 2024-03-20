@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Labs } from "../../models/Labs";
 import TabPane from "antd/es/tabs/TabPane";
-import { Upload, Button, message, UploadFile, Collapse, Typography, Space } from 'antd';
+import { Upload, Button,  message, UploadFile, Collapse, Typography, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/firebase";
@@ -153,6 +153,7 @@ const LabDetails: React.FC = () => {
         };
         file && uploadFile();
     }, [file]);
+
 
     const handleUpload = async () => {
         if (progress < 100) {

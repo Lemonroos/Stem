@@ -3,15 +3,17 @@ import {
   UserOutlined
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
-import { Link, Outlet } from 'react-router-dom';
-import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import getUser from "../../config/auth";
+import MySpin from "../UI/spin";
 import TeacherSideNav from "./LayoutSider/TeacherSideNav";
+import { CContent, CHeader, CSideHeader, CSider } from "./PayLayoutStyle";
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
 const TeacherPageLayout = () => {
+  const location = useLocation();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -21,13 +23,16 @@ const TeacherPageLayout = () => {
       setIsLoading(false);
     };
     fetchUser();
-    // setUser(JSON.parse(localStorage.getItem('user')));
   }, []);
-  if (isLoading) {
-    return <div>Loading...</div>; // Or your loading spinner
+  function previous() {
+    if (location.pathname === '/teacher') {
+    }
+    window.history.go(-1);
   }
-
-
+  
+  if (isLoading) {
+    return <MySpin />;
+  } else
   return (
     <>
       <Layout style={{ height: "100vh" }}>
@@ -57,6 +62,11 @@ const TeacherPageLayout = () => {
 
 
           <Header style={CHeader}>
+            {window.location.pathname != '/teacher' && (
+              <Button type="primary" onClick={previous} id="backward">
+                Back
+              </Button>
+            )}
             <Link to="/">
               <Button
                 size={"large"}
