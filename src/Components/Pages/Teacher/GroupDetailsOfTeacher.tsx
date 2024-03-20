@@ -1,25 +1,20 @@
 import { Button, Card, Collapse, Form, Input, Modal, Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { Groups } from "../../models/Groups";
-import { MembersInGroup, MembersNotInGroup } from "../../models/Members";
+import { useParams } from "react-router-dom";
 import MySpin from "../../UI/spin";
+import { Groups } from "../../models/Groups";
+import { MembersInGroup } from "../../models/Members";
 import { Teams } from "../../models/Teams";
 const { Panel } = Collapse;
 const { Column } = Table;
 
 const groupUrl = "https://stem-backend.vercel.app/api/v1/groups";
 const membersInGroupUrl = "https://stem-backend.vercel.app/api/v1/members/member-in-group";
-const memberUrl = "https://stem-backend.vercel.app/api/v1/members";
 const teamInGroupUrl = "https://stem-backend.vercel.app/api/v1/teams/team-in-group";
 const createTeamUrl = "https://stem-backend.vercel.app/api/v1/teams/create";
 const GroupDetailsOfTeacher: React.FC = () => {
-    const programId = useParams().programId
     const groupId = useParams().groupId;
-    const search = useLocation().search;
-    const params = new URLSearchParams(search);
-    const SchoolId = params.get("SchoolId");
     const [isLoading, setIsLoading] = useState(true);
     const [groupInfo, setGroupInfo] = useState<Groups | null>(null);
     const [groupMembers, setGroupMembers] = useState<MembersInGroup[]>([]);
