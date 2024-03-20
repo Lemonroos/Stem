@@ -26,7 +26,7 @@ const AdminProgramDetails: React.FC = () => {
   const [programDetails, setProgramDetails] = useState<Programs>();
   const [labs, setLabs] = useState<Labs[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<any>();
+  const [setError] = useState<any>();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [createLabsModalOpen, setCreateLabsModalOpen] = useState(false);
 
