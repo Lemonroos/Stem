@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Labs } from "../../models/Labs";
 import TabPane from "antd/es/tabs/TabPane";
-import { Upload, Button, message, UploadFile, Collapse } from 'antd';
+import { Upload, Button, message, UploadFile, Collapse, Typography, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/firebase";
 import getUser from "../../../config/auth";
-import { TeamMember } from "../../models/Members";
+import { TeamMember, TeamSolution } from "../../models/Members";
 import MySpin from "../../UI/spin";
 const { Panel } = Collapse;
+const { Title, Link } = Typography;
 const LabDetails: React.FC = () => {
     const { programId, labId } = useParams();
     const labByIdUrl = 'https://stem-backend.vercel.app/api/v1/labs';
@@ -23,7 +24,7 @@ const LabDetails: React.FC = () => {
     const [userId, setUserId] = useState<any>(null);
     const [teamId, setTeamId] = useState(null);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
-
+    const [solutionData, setSolutionData] = useState<TeamSolution>();
     const [isLoading, setIsLoading] = useState(true);
     async function getLabsInProgramm() {
         await axios.get(`${labByIdUrl}/${labId}`)
@@ -71,6 +72,28 @@ const LabDetails: React.FC = () => {
             setIsLoading(false)
         }
     }, [teamId]);
+
+    const fetchSolutionData = async () => {
+        try {
+            const response = await axios.get(`https://stem-backend.vercel.app/api/v1/team-solution/team-solution-list/solutions-of-team?TeamId=${teamId}&LabId=${labId}`);
+            if (response.status === 200) {
+                setSolutionData(response.data);
+                console.log("daaddsa" + solutionData);
+            } else {
+                throw new Error('HTTP status ' + response.status);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    useEffect(() => {
+        if (teamId && labId) {
+            fetchSolutionData();
+            setIsLoading(false)
+        }
+    }, [teamId,labId]);
+
+
 
 
     const handleRemove = (file: UploadFile) => {
@@ -203,7 +226,18 @@ const LabDetails: React.FC = () => {
 
                 </TabPane>
                 <TabPane tab="GRADE" key="3">
-                    {/* GRADE content */}
+                    {solutionData ? (
+                        <Space direction="vertical">
+                            <Title level={4}>Solution:</Title>
+                            <Link href={solutionData.Solution} target="_blank">
+                                {solutionData.Solution || 'N/A'}
+                            </Link>
+                            <Title level={4}>Score:</Title>
+                            <p>{solutionData.Score || 'N/A'}</p>
+                        </Space>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
                 </TabPane>
                 <TabPane tab="TEACHER'S MESSAGE" key="4">
                     {/* Teacher's message content */}

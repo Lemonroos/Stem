@@ -26,3 +26,17 @@ export interface TeamMember {
     TeamId: number;
     TeamName: string;
 }
+
+export interface TeamSolution {
+    Id: number;
+    Solution: string;
+    Score: number | null;
+    CreateDate: string;
+    UpdateDate: string;
+    LabId: number;
+    Topic: string;
+    Description: string;
+    TeamId: number;
+    TeamName: string;
+}
+
