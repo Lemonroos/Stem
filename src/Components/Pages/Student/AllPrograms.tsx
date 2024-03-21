@@ -28,7 +28,7 @@ export default function AllPrograms() {
                     setProgramNotBelongToStudent(res.data);
                 })
         } catch (error) {
-            console.error("Error fetching programs of student:", error);
+            // console.error("Error fetching programs of student:", error);
         }
     }
 

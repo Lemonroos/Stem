@@ -80,7 +80,7 @@ const MyGroups: React.FC = () => {
         // setUser(JSON.parse(localStorage.getItem('user')));
     }, []);
     // const studentId = userId;
-    console.log(userId);
+    // console.log(userId);
     const groupsByStudentUrl = 'https://stem-backend.vercel.app/api/v1/members/groups-of-a-student';
     const [data, setData] = useState<ProgramAndGroup[]>();
     const [loading, setLoading] = useState(true);

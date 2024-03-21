@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Labs } from "../../models/Labs";
 import TabPane from "antd/es/tabs/TabPane";
-import { Upload, Button,  message, UploadFile, Collapse, Typography, Space } from 'antd';
+import { Upload, Button, message, UploadFile, Collapse, Typography, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/firebase";
@@ -33,7 +33,7 @@ const LabDetails: React.FC = () => {
             .then(data => {
                 setLab(data.data)
             })
-        console.log("Lab: " + labId)
+        // console.log("Lab: " + labId)
     }
     useEffect(() => {
         getLabsInProgramm()
@@ -68,7 +68,7 @@ const LabDetails: React.FC = () => {
         // console.log(response.data)
     };
     useEffect(() => {
-        console.log('teamId:', teamId);
+        // console.log('teamId:', teamId);
         if (teamId) {
             fetchTeamMembers();
             setIsLoading(false)
@@ -80,7 +80,7 @@ const LabDetails: React.FC = () => {
             const response = await axios.get(`https://stem-backend.vercel.app/api/v1/team-solution/team-solution-list/solutions-of-team?TeamId=${teamId}&LabId=${labId}`);
             if (response.status === 200) {
                 setSolutionData(response.data);
-                console.log("daaddsa" + solutionData);
+                // console.log("daaddsa" + solutionData);
             } else {
                 throw new Error('HTTP status ' + response.status);
             }
@@ -128,14 +128,14 @@ const LabDetails: React.FC = () => {
             uploadTask.on('state_changed',
                 (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
+                    // console.log('Upload is ' + progress + '% done');
                     setProgress(progress);
                     switch (snapshot.state) {
                         case 'paused':
-                            console.log('Upload is paused');
+                            // console.log('Upload is paused');
                             break;
                         case 'running':
-                            console.log('Upload is running');
+                            // console.log('Upload is running');
                             break;
                     }
                 },
@@ -158,8 +158,9 @@ const LabDetails: React.FC = () => {
     const handleUpload = async () => {
         if (progress < 100) {
             // Your upload logic here
+            message.info('Checking file...');
         } else {
-            console.log(data);
+            // console.log(data);
             try {
                 const response = await axios.post(`https://stem-backend.vercel.app/api/v1/team-solution?LabId=${labId}&TeamId=${teamId}`, {
                     Solution: data,
@@ -241,7 +242,7 @@ const LabDetails: React.FC = () => {
                                 disabled={!file || progress < 100 || isGraded}
                                 style={{ marginTop: '1em' }}
                             >
-                                {!file ? 'Start Upload' : progress < 100 ? 'Uploading...' : 'Submit File'}
+                                {!file ? 'Start Upload' : progress < 100 ? 'Checking file...' : 'Submit File'}
                             </Button>
                         </Space>
                     </TabPane>
