@@ -43,6 +43,7 @@ import SchoolAdminDashboard from "../Pages/SchoolAdmin/SchoolAdminDashboard";
 import PrivateRoute from "../../config/RoleBasedRoutes";
 import AdminProgram from "../Pages/SystemAdmin/AdminProgram";
 import AdminProgramDetails from "../Pages/SystemAdmin/AdminProgramDetails";
+import LabsDetail from "../Pages/SystemAdmin/LabsDetail";
 
 
 
@@ -92,7 +93,8 @@ export const routes = createBrowserRouter([
       },
       { path: "groups", element: <GroupList /> },
       { path: "programs", element: <AdminProgram /> },
-      { path: "programs/details/:id", element: <AdminProgramDetails /> }
+      { path: "programs/details/:id", element: <AdminProgramDetails /> },
+      { path: "programs/details/:id/labs/:id", element: <LabsDetail />  }
     ],
   },
   {
