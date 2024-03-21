@@ -31,7 +31,7 @@ const MyProgram = () => {
         await axios.get(`${labsInProgramUrl}${progId}`)
             .then(data => {
                 setLabs(data.data)
-                console.log(data.data)
+                // console.log(data.data)
             })
     }
     useEffect(() => {
@@ -39,9 +39,9 @@ const MyProgram = () => {
         getLabsInProgramm()
     }, []);
 
-    const onChange = (key: string | string[]) => {
-        console.log(key);
-    };
+    // const onChange = (key: string | string[]) => {
+    //     // console.log(key);
+    // };
     const items: CollapseProps['items'] = [];
     labs.forEach((lab) => {
         items.push({
@@ -131,7 +131,7 @@ const MyProgram = () => {
                     </Row>
                 </Card>
             )}
-            <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} />
+            <Collapse items={items} defaultActiveKey={['1']}  />
         </div>
     );
 };

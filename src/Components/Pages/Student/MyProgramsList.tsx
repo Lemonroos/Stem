@@ -23,7 +23,7 @@ const MyProgramList = () => {
         // setUser(JSON.parse(localStorage.getItem('user')));
     }, []);
     // const studentId = userId;
-    console.log(userId);
+    // console.log(userId);
     async function getProgramByStudentId() {
         try {
             await axios.get(`${progamsByStudentUrl}?StudentId=${userId}`)
